@@ -11,6 +11,8 @@ This is an application to rate, review and add films to watchlist. The project i
 ## Stakeholders
 
   - Users: They are the final users of the platform, who contribute with reviews and rating of each film.
+  - Developers: People who are going to create, design and code the project.
+
 
 
 
