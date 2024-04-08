@@ -1,2 +1,2 @@
-# advanced_programming
+# Advanced Programming
 This is my advanced programming course repository
