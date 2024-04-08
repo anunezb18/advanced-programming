@@ -24,8 +24,18 @@ The application is going to be created with phyton in the backend and for the fr
 - As a user I want to rate a film and write a review so that I can share my opinion about the film.
 - As a user I want to see reviews of other users about a film so that I can have an idea of the audience reception. 
 - As a user I want to add films to my watchlist so that I can remember the films I want to see and have a list of them.
-- As a user I want to register in the app so that I can save my information. 
+- As a user I want to register in the app so that I can save my information.
 
+## Entities
+
+- User: name, username, password, email, info.
+- Film: Average score, watched/ not watched, info.
+- Review: replies
+- Watchlist
+
+## Initial Information
+
+The application is gonig to be connected to a database where is stored all the info about the film, like cast, director, genre, lenght, among others. Likewise, there will be initialized some users in order to apply tests.
 
 
 
