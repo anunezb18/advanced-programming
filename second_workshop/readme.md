@@ -1,4 +1,4 @@
-# 2nd Version of The Car Company Application
+# Car Company Application (Version 2.0)
 
 # Business Model
 This is an application of a car company. The client can search, filter, buy and watch a car. The admin can add vehicles to the catalog.
