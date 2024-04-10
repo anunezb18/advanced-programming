@@ -10,7 +10,7 @@ This is an application of a car company. The client can search, filter, buy and 
 - As a client, I want to filter the vehicle by the type, so that I can search a vehicle of the type i am interested in.
 - As a client, I want to set aside a vehicle, so that I can buy it.
 
-  #Entities
+  # Entities
   - Manager: add cars.
   - Client: watch, search, filter.
   - Vehicle: set aside (be removed from the list of vehicles).
