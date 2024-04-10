@@ -14,10 +14,11 @@ This is an application of a car company. The client can search, filter, buy and 
 - Manager: add vehicles.
 - Client: watch, search, filter.
 - Vehicle: set aside (be removed from the list of vehicles).
+- Each type of Vehicle.
 
 # Updates
 Now, the application has been updated, the following are the upgrades. 
 - New menu
 - User authentication. If the user is a client, he can only search and watch vehicles. Instead, if the user is an admin, he can add vehicles to the catalog.
 - Now, the client can set aside a vehicle.
-- There will be some initial information preloaded
+- There will be some initial information preloaded.
