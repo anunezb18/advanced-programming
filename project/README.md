@@ -30,6 +30,7 @@ The application is going to be created with phyton in the backend and for the fr
 ## Entities
 
 - User: name, username, password, email, info.
+- Admin: add films, new releases.
 - Film: Average score, watched/ not watched, info.
 - Review: replies
 - Watchlist
