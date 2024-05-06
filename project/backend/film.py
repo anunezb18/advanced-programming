@@ -65,5 +65,3 @@ class FilmDB(Base):
     reviews = Column(String)
     lenght = Column(str)
     crew = Column(List[String])
-
-print("Example")
