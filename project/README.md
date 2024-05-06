@@ -22,4 +22,3 @@ The application is going to be created with phyton in the backend and for the fr
 
 The application is gonig to be connected to a database where is stored all the info about the film, like cast, director, genre, lenght, among others. Likewise, there will be initialized some users in order to apply tests.
 
-## hol jajsja xd
