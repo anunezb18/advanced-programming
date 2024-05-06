@@ -1,8 +1,8 @@
 """
 This file contains the class User
 
-@Author: mdpilarp@udistrital.edu.co
-anunezb@udistrital.edu.co
+@Author: <mdpilarp@udistrital.edu.co>
+<anunezb@udistrital.edu.co>
 """
 from pydantic import BaseModel
 class User(BaseModel):
