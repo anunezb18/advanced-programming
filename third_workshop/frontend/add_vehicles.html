@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <title>The Car Company Foundation</title>
+        <meta charset="UTF-8">
+        <meta name="author" content="A. Nuñez">
+        <meta name="description" content="Here you can add a vehicle to the catalog">
+        <meta name="keywords" content="cars, vehicle, ud">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>The Car Company Foundation</h1>
+        </header>  
+        <main>
+            <h2>Add a new vehicle</h2>
+            <p>Here you can add vehicles </p>
+                <form action="#" method="post">
+                    <label for="engine-type">Engine Type:</label>
+                    <input type="text" id="engine-type" name="engine-type" required><br><br>
+                    
+                    <label for="engine-potency">Engine Potency:</label>
+                    <input type="number" id="engine-potency" name="engine-potency" step="0.01" required><br><br>
+                    
+                    <label for="engine-weight">Engine Weight:</label>
+                    <input type="number" id="engine-weight" name="engine-weight" step="0.01" required><br><br>
+            
+                    <label for="chasis">Chasis (A/B):</label>
+                    <input type="text" id="chasis" name="chasis" required><br><br>
+            
+                    <label for="vehicle-model">Vehicle Model:</label>
+                    <input type="text" id="vehicle-model" name="vehicle-model" required><br><br>
+            
+                    <label for="vehicle-year">Vehicle Year:</label>
+                    <input type="number" id="vehicle-year" name="vehicle-year" required><br><br>
+            
+                    <input type="submit" value="Create Vehicle">
+                </form>
+        </main>
+        <footer>
+            <p>&copy; 2024 The Car Company Foundation</p>
+        </footer>  
+    </body>
+</html>
