@@ -10,7 +10,9 @@ from sqlalchemy.orm import sessionmaker
 
 
 class PostgresConnection:
-
+    """
+    This class is used to connect to the database
+    """
     def __init__(
         self, user: str, password: str, host: str, port: int, database_name: str
     ):

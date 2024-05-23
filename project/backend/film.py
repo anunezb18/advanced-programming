@@ -10,6 +10,8 @@ from pydantic import BaseModel
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
 from db_connection import PostgresConnection
+from rating import Rating
+from review import Review
 
 
 class Film(BaseModel):
@@ -20,18 +22,19 @@ class Film(BaseModel):
     director: str
     year: int
     synopsis: str
-    ratings: str
-    reviews: str
+    ratings: List[Rating]
+    reviews: List[Review]
     lenght: str
     crew: List[str]
 
-    def __init__(self):
-        self.connection = PostgresConnection(
-            "ud_ap_user", "P4$$w0rd", "localhost", 5432, "ud_ad_project"
-        )
-
     def add_to_db(self):
-        session = self.connection.session()
+        """
+        This function adds a film to the database
+        """
+        connection = PostgresConnection(
+            "ud_admin", "Admin12345", "localhost", "5432", "udproject"
+        )
+        session = connection.session()
         film_db = FilmDB(
             title=self.title,
             code=self.code,
@@ -43,21 +46,29 @@ class Film(BaseModel):
             lenght=self.lenght,
             crew=self.crew,
         )
+        session.add(film_db)
+        session.commit()
+        session.close()
 
-        self.session.add(film_db)
-        self.session.commit()
-        self.session.close()
-    
     class Config:
+        """
+        Pydantic configurarion for ORM mode
+        """
         orm_mode = True
+
 
 Base = declarative_base()
 
+
 class FilmDB(Base):
+    """
+    This class represents the behavior of the film in the database
+    """
+
     __tablename__ = "films"
 
     title = Column(String)
-    code = Column(Integer, primary_key=True)    
+    code = Column(Integer, primary_key=True)
     director = Column(String)
     year = Column(Integer)
     synopsis = Column(String)
