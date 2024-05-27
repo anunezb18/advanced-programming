@@ -31,14 +31,19 @@ def register_user(user: User = Body(...)):
 
     return {"message": "User registered successfully"}
 
+
 @app.post("/users/login")
 def login_user(username: str, password: str):
     """This method logs in a user"""
 
-    user = next((user for user in Catalog.users_registered if user.username == username), None)
+    user = next(
+        (user for user in Catalog.users_registered if user.username == username), None
+    )
 
     if user is None:
-        raise HTTPException(status_code=404, detail=f"User with username {username} not found")
+        raise HTTPException(
+            status_code=404, detail=f"User with username {username} not found"
+        )
 
     if user.password != password:
         raise HTTPException(status_code=400, detail="Incorrect password")
@@ -139,10 +144,11 @@ def add_film_to_watchlist(user_id: int, film_id: Film.code = Body(...)):
 
     return {"message": "Film added to watchlist successfully"}
 
+
 @app.post("/admin/films")
 def add_film_to_catalog(film: Film = Body(...)):
     """This method adds a film to the catalog"""
-    
+
     Catalog.catalog_films.append(film)
 
     return {"message": "Film added to catalog successfully"}
