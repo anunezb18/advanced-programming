@@ -1,0 +1,5 @@
+# First of all, it is important to creat a virtual environment and install all the libraries required
+
+fastapi
+uvicorn
+sqlalchemy
