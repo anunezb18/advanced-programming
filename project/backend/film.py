@@ -1,5 +1,5 @@
 """
-This file contains the class User
+This file contains the class Film
 
 @Author: <mdpilarp@udistrital.edu.co>
 <anunezb@udistrital.edu.co>

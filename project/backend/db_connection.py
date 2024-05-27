@@ -1,5 +1,5 @@
 """
-This file contains the clas for connect into the database
+This file contains the class for connect into the database
 
 @Author: <mdpilarp@udistrital.edu.co>
 <anunezb@udistrital.edu.co>
