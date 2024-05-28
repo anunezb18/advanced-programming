@@ -12,8 +12,22 @@
         <div>
             <button onclick="callMessage()">Get Message</button>
             <button onclick="callTable()">Get Table</button>
+            <button onclick="showForm()">Get Form</button>
         </div>
         <div id="result"></div>
+        <!-- Se crea el form para agregar productos -->
+        <div id="form" style="display: none;">
+            <form id="myForm" onsubmit="event.preventDefault(); addProduct();">
+                <label for="productId">Product ID:</label><br>
+                <input type="text" id="productId" name="productId"><br>
+                <label for="name">Product Name:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="description">Product Description:</label><br>
+                <input type="text" id="description" name="description"><br>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+        <!-- Estaba mal ubicado -->
         <script src="functions.js"></script>
     </body>
 </html>
