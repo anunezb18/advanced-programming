@@ -8,7 +8,7 @@ This file contains the class Film
 from typing import List
 from pydantic import BaseModel
 from sqlalchemy import Column, String, Integer
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from db_connection import PostgresConnection
 from rating import Rating
 from review import Review
@@ -54,7 +54,7 @@ class Film(BaseModel):
         """
         Pydantic configurarion for ORM mode
         """
-        orm_mode = True
+        from_attributes = True
 
 
 Base = declarative_base()
@@ -74,5 +74,5 @@ class FilmDB(Base):
     synopsis = Column(String)
     ratings = Column(String)
     reviews = Column(String)
-    lenght = Column(str)
-    crew = Column(List[String])
+    lenght = Column(String)
+    crew = Column(String)

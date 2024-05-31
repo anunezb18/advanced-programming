@@ -5,17 +5,11 @@ This file contains the class Catalog
 <anunezb@udistrital.edu.co>
 """
 
-from typing import List
 from film import Film, FilmDB
 from db_connection import PostgresConnection
 from pydantic import BaseModel
-from user import User
-
 class Catalog(BaseModel):
     """This class represents a catalog of films"""
-
-    catalog_films: List[Film] = []
-    users_registered: List[User] = []
 
     @classmethod
     def show_all_films(cls):
@@ -73,3 +67,4 @@ class Catalog(BaseModel):
             if film.code == code:
                 return film
         return None
+
