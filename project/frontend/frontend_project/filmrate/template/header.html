@@ -1,0 +1,24 @@
+{% load static %}
+<div class="header_section">
+   <nav class="navbar">
+      <div class="logo_header">
+         <a href="{% url 'index' %}"><img class="logo_header" src="{% static 'images/logo.png' %}"></a>         
+      </div>
+      <div class="menu">
+         <ul>
+            <li class="menu-item">
+                <a class="menu-link" href="{% url 'sign_in' %}">Sign in</a>
+            </li>
+            <li class="menu-item">
+               <a class="menu-link" href="{% url 'create_account' %}">Creat acount</a>
+            </li>
+            <li class="menu-item">
+               <a class="menu-link" href="{% url 'films' %}">Films</a>
+            </li>
+            <li class="menu-item">
+               <a class="menu-link" href="{% url 'films' %}"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </li>
+         </ul>
+      </div>
+   </nav>
+</div>

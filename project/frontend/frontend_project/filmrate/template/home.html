@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <!-- header section start -->
+    {% include "header_user.html" %}
+    <!-- header section end -->
+     <!-- header section end -->
+     <!-- banner section start -->
+     <div class="banner_section banner_home">
+           <div class="container">  
+                {% with firstname="Tobias" %}
+                    <h1 class="banner_title">Wellcome back, {{ firstname}}</h1>
+                {% endwith %}
+                <p class="banner_text">What film do you want search?</p>
+                <div class="search">
+                    <input type="text" placeholder="Search film...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+           </div>
+     </div>
+    <!-- banner section end -->
+    <!-- films section end -->
+    <div class="films_section films_home">
+        <div class="container">
+            <div class="title">
+                <h2>Films</h2>
+            </div>
+            <div class="films">
+                <div class="container_film">
+                    <img src="{% static 'images/1.png' %}" alt="poster film">
+                    <div class="info_film">
+                        <h3 class="text_film"></h3>
+                        <p class="p_film"></p>
+                    </div>
+                </div>
+                <div class="container_film">
+                    <img src="{% static 'images/2.png' %}" alt="poster film">
+                    <div class="info_film">
+                        <h3 class="text_film"></h3>
+                        <p class="p_film"></p>
+                    </div>
+                </div>
+                <div class="container_film">
+                    <img src="{% static 'images/3.png' %}" alt="poster film">
+                    <div class="info_film">
+                        <h3 class="text_film"></h3>
+                        <p class="p_film"></p>
+                    </div>
+                </div>
+                <div class="container_film">
+                    <img src="{% static 'images/4.png' %}" alt="poster film">
+                    <div class="info_film">
+                        <h3 class="text_film"></h3>
+                        <p class="p_film"></p>
+                    </div>
+                </div>
+                <div class="container_film">
+                    <img src="{% static 'images/5.png' %}" alt="poster film">
+                    <div class="info_film">
+                        <h3 class="text_film"></h3>
+                        <p class="p_film"></p>
+                    </div>
+                </div>  
+            </div>
+            <div class="see_btn"><a href="#">See More Films</a></div>
+        </div>
+    </div>
+    <!-- films section end -->
+    <!-- review section star -->
+    <div class="review_section review_home">
+        <div class="container">
+            <div class="title">
+                <h2>Reviews</h2>
+            </div>
+            <div class="reviews">
+                <div class="container_review">
+                    <div class="img_review">
+                        <img src="{% static 'images/2.png' %}" alt="">
+                    </div>
+                    <div class="text_review">
+                        <h3>Name movie</h3>
+                        <div class="username">
+                            <div><img src="" alt=""></div>
+                            <div><i class="fa-solid fa-circle-user"></i></div>
+                            <div><p><b>Username</b></p></div>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
+                            alias ipsum quia, aperiam soluta. lorem20
+                        </p>
+                    </div>
+                </div>
+                <div class="container_review">
+                    <div class="img_review">
+                        <img src="{% static 'images/5.png' %}" alt="">
+                    </div>
+                    <div class="text_review">
+                        <h3>Name movie</h3>
+                        <div class="username">
+                            <div><img src="" alt=""></div>
+                            <div><i class="fa-solid fa-circle-user"></i></div>
+                            <div><p><b>Username</b></p></div>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
+                            alias ipsum quia, aperiam soluta.
+                        </p>
+                    </div>
+                </div>
+                <div class="container_review">
+                    <div class="img_review">
+                        <img src="{% static 'images/4.png' %}" alt="">
+                    </div>
+                    <div class="text_review">
+                        <h3>Name movie</h3>
+                        <div class="username">
+                            <div><img src="" alt=""></div>
+                            <div><i class="fa-solid fa-circle-user"></i></div>
+                            <div><p><b>Username</b></p></div>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
+                            alias ipsum quia, aperiam soluta.
+                        </p>
+                    </div>
+                </div>
+                <div class="container_review">
+                    <div class="img_review">
+                        <img src="{% static 'images/3.png' %}" alt="">
+                    </div>
+                    <div class="text_review">
+                        <h3>Name movie</h3>
+                        <div class="username">
+                            <div><img src="" alt=""></div>
+                            <div><i class="fa-solid fa-circle-user"></i></div>
+                            <div><p><b>Username</b></p></div>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
+                            alias ipsum quia, aperiam soluta.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="see_btn"><a href="#">Search movie</a></div>
+        </div>
+    </div>
+    <!-- review section end -->
+    <!-- footer  section start -->
+    {% include "footer.html" %}
+    <!-- footer  section end -->
+
+</body>
+</html>
