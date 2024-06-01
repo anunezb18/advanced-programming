@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Watchlist</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+    <!-- header section start -->
+    {% include "header_user.html" %}
+    <!-- header section end -->
+    <!-- banner section start -->
+     <div class="banner_section banner_watchlist">
+           <div class="container">
+                <h1 class="banner_title">Wellcome back, username</h1>
+                <p class="banner_text">What film do you want search?</p>
+                <div class="search">
+                    <input type="text" placeholder="Search film...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+           </div>
+     </div>
+    <!-- banner section end -->
+    <!-- films section end -->
+    <div class="films_section watchlist">
+        <div class="container">
+            <div class="title">
+                <h2>Your watchlist</h2>
+            </div>
+            <div class="films">
+                {% for film in watchlist %}
+                <div class="container_film">
+                    <img src={% static  film.image %}  alt="poster ">
+                <div class="info_film">
+                <h3 class="text_film">{{ film.name }}</h3>
+                <p class="p_film">
+                    {% if film.stars == "1" %}
+                    <i class="fa-solid fa-star"></i>
+                    {% elif film.stars == "2" %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    {% elif film.stars == "3" %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    {% elif film.stars == "4" %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    {% elif film.stars == "5" %}
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    {% endif%}
+                </p>
+    </div>
+</div>
+{% endfor %}
+            </div>
+            <div class="see_btn"><a href="{% url 'films' %}">Add More Films</a></div>
+        </div>
+    </div>
+    <!-- films section end -->
+    <!-- footer  section start -->
+    {% include "footer.html" %}
+    <!-- footer  section end -->
+
+</body>
+</html>

@@ -1,0 +1,683 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    box-sizing: border-box !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #18122B;
+    font-size: 14px;
+    font-family: poppins;
+    line-height: 1.80857;
+    font-weight: normal;
+    overflow-x: hidden;
+    
+}
+
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/*--------------------header section-----------------------*/
+.header_section{
+   height: 60px;
+   background-color: #18122B;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2px;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 17px;
+    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif;
+    font-style: normal;
+
+  }
+
+.logo_header {
+    height: 50px; /* Ajusta esto al tamaño de tu logo */
+}
+
+.menu ul li {
+    display: inline-block;
+    padding: 0px 35px;
+}
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+}
+.menu li a:hover {
+    text-decoration: underline;
+    transition: ease all 0.5s;
+}
+
+/*--------------------Banner section-----------------------*/
+.banner_section{
+    width: 100%;
+    height: 80%;
+    float: left;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    transition: ease all 0.5s;
+}
+
+.banner_index{
+    background-image: url("../images/banner_index.jpg");
+    
+}
+
+.banner_index .container{
+    width: 45%;
+}
+
+.banner_section .container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 60px;
+    justify-content: center;
+    
+}
+
+.banner_section h1{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.banner_section p{
+    color: #cecece;
+    font-size: 17px;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+
+.search input{
+    background-color: white;
+    border: #18122B;
+    border-radius: 20px;
+    padding: 10px 0px 10px 15px;
+    width: 80%;
+    font-size: 17px;
+}
+
+.search i{
+    color: white;
+    font-size: 20px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+/*--------------------Films section-----------------------*/
+.films_section, .review_section, .info_section{
+    background-color: #535C91;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: none;
+}
+
+.films_section .container, .review_section .container, .info_section .container{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    transition: none;
+}
+
+.films_section .container .films , .review_section .container .reviews, 
+.info_section .container .info, .film_container .film{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-self: center;
+    transition: none;
+}
+
+.films_section h2, .review_section h2{
+    color: white;
+    font-size: 30px;
+    font-family: "Josefin Sans", sans-serif;
+    padding-left: 20px;
+    transition: none;
+}
+
+.films_section .container .films .container_film{
+    width: 180px;
+    height: 260px;
+    margin: 5px;
+    border-radius: 7px;
+    position: relative;
+    transition: none;
+}
+
+.films_section .container .films .container_film img{
+    width: 100%;
+    margin: 5px;
+    border-radius: 7px;
+    transition: none;
+}
+
+.info_film{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 5px;
+    left: 5px;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.699);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 7px;
+    transition: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info_film h3{
+    transition: 0s no;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 20px;
+    margin: 0;
+}
+
+.container_film:hover .info_film {
+    visibility: visible;
+
+}  
+
+.see_btn {
+    width: 170px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.see_btn a {
+    width: 170px;
+    float: right;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #df9911;
+    padding: 7px 0px;
+    border-radius: 30px;
+    margin: 20px 0;
+    font-family: "Josefin Sans", sans-serif;
+    text-decoration: none;
+    transition: ease all 0.5s;
+}
+
+.see_btn a:hover {
+    color: #000;
+    background-color: #ffffff;
+    transition: ease all 0.5s;
+}
+
+/*--------------------Review Section------------------*/
+
+.review_section .container .reviews .container_review{
+    width: 48%;
+    height: auto;
+    padding: 20px;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    background-color: #9290C3;
+    margin: 5px;
+}
+
+.review_section .container .container_review .img_review img{
+    width: 100px;
+    margin: 15px;
+}
+
+.review_section .container .container_review .text_review{
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px;
+}
+
+.text_review h3{
+    color: #18122B;
+    font-size: 20px;
+    font-family: "Josefin Sans", sans-serif;
+    margin: 0px;
+}
+
+.username{
+    display: flex;
+    flex-direction: row;
+}
+
+.username i{
+    font-size: 20px;
+    padding: 15px 10px 0 0px;
+}
+
+.text_review p{
+    font-size: 15px;
+    font-family: "Josefin Sans", sans-serif;
+    color: #383838;
+}
+
+.review_section .text_signin{
+    color: #18122B;
+    font-size: 20px;
+    font-family: "Josefin Sans", sans-serif;
+    align-self: center;
+    text-align: center;
+    line-height: 10px;
+    padding: 15px;
+}
+
+
+/*--------------Info section---------------*/
+.info_section .container .info{
+    width: 100%;
+}
+.info_section .container .info_text{
+    width: 31%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #18122B;
+    color: white;
+    font-family: "Josefin Slab", serif;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    font-size: 16px;
+}
+
+.info_section .container .info_text i{
+    font-size: 30px;
+    padding: 10px 20px 10px 5px;
+    justify-self: center;
+    align-self: center;
+}
+
+.info_section h4{
+    color: #18122B;
+    font-size: 20px;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+
+/*-------------Footer Section-------------*/
+.footer_section {
+    width: 100%;
+    height: 25%;
+    float: left;
+    background: linear-gradient(#535C91 ,#18122B );
+    padding: 150px 0px 120px 0;
+    align-items: center;
+    text-align: center;
+}
+
+.footer_menu, .copyright_text{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+}
+
+.footer_menu ul {
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    font-family: "Josefin Sans", sans-serif;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+}
+
+.footer_menu li {
+    float: left;
+    font-size: 18px;
+    color: #ffffff;
+    padding: 0px 25px;
+    list-style: none;
+    
+}
+
+.footer_menu li a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: ease all 0.5s;
+}
+
+.footer_menu li a:hover {
+    color: #d89616;
+    transition: ease all 0.5s;
+}
+
+.copyright_text{
+    font-family: "Josefin Sans", sans-serif;
+    color: rgb(214, 214, 214);
+}
+
+/*------------Banner--------------*/
+.banner_home, .banner_watchlist, .banner_films{
+    background-image: linear-gradient(#18122B, #18122b10, #535c9109 ,#535C91 ), url(../images/banneer.jpg);
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    display: flex;
+    align-items: center;
+    
+}
+
+.banner_home .container, .banner_watchlist .container{
+    width: 60%;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+/*------------------Form--------------------*/
+.form_section{
+    background: linear-gradient(#18122B, #00000062, #535c914d ,#535c91 ), url(../images/banner_create_account.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.create_account{
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.form{
+    background-color: #9290C3;
+    width: 50%;
+    min-width: 400px;
+    padding: 3.5em 3em;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.836);
+    text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+    margin: 30px 0;
+    align-self: center;
+}
+
+.form_title{
+    font-size: 35px;
+    margin: 15px 0 10px 0;
+}
+
+.form_p{
+    font-size: 17px;
+    font-weight: 300;
+}
+
+.form_container{
+    margin-top: 3em;
+    display: grid;
+    gap: 2.5em;
+}
+
+.form_group{
+    position: relative;
+    --color:#313131de;
+}
+
+.form_input{
+    width: 100%;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: .9em .0em .6em .3em;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid var(--color);
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.form_input:not(:placeholder-shown){
+    color: #272727;
+}
+
+.form_input:focus + .form_label,
+.form_input:not(:placeholder-shown) + .form_label{
+    transform: translateY(-3px) scale(.75);
+    transform-origin: left top;
+    color: #18122B;
+}
+
+.form_label{
+    color:var(--color);
+    cursor: pointer;
+    position:absolute;
+    top: 0;
+    left: 5px;
+    transform: translateY(10px);
+    transition: transform .5s, color .3s;
+}
+
+.form_submit{
+    background: #c5c958;
+    color:#18122B;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    padding: .8rem 0;
+    border: none;
+    border-radius: .5em;
+}
+
+.form_line{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    width: 100%;
+    height: 1px;
+    background-color: #535C91;
+    transform: scale(0);
+    transform: left botton;
+    transition: transform .4s;
+}
+
+.form_input:focus ~ .form_line,
+.form_input:not(:placeholder-shown) ~ .form_line{
+    transform: scale(1);
+}
+
+
+/*Film templeate*/
+.film_container{
+    width: 100%;
+    background: linear-gradient(#18122B,#535c91 );
+    display: flex;
+    justify-content: center;
+}
+
+.film_container .container{
+    margin: 30px 10px 0 10px;
+    width: 80%;
+    align-self: center;
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: "img info action"
+                        "reviews reviews reviews";
+}
+
+.film_container .container .film_img{
+    grid-area: img;
+} 
+
+.film_container .container .film_img img{
+    width: 90%;
+    border-radius: 5px;
+}
+
+.film_container .container .film_info{
+    grid-area: info;
+    color: white;
+    padding: 10px;
+} 
+
+.film_container .container .film_info .film_title{
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 24px;
+}
+
+.film_container .container .film_info .film_title h3{
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+
+.film_container .container .film_info .film_descrition{
+    font-family: "Josefin Slab", serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #eeeeee;
+}
+
+.film_container .container .film_actions{
+    justify-self: center;
+    text-align: center;
+    padding: 10px;
+    background-color: #9290C3;
+    border-radius: 7px;
+    margin-top: 20px;
+    width: 70%;
+    height: 50%;
+    font-family: "Josefin Sans", sans-serif;
+    grid-area: action;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas: "watched add_watchlist"
+                        "rating rating";
+} 
+
+.film_container .container .film_actions .watched,
+.film_container .container .film_actions .add_watchlist,
+.film_container .container .film_actions .rating{
+    padding: 10px;
+}
+
+.film_container .container .film_actions .watched i, 
+.film_container .container .film_actions .add_watchlist i{
+    font-size: 30px;
+}
+
+.film_container .container .film_actions .rating{
+    grid-area: rating;
+}
+
+.film_container .container .film_review{
+    grid-area: reviews;
+    font-family: "Josefin Slab", serif;
+}
+
+.film_container .container .film_review .review{
+    background: #9290C3;
+    border-radius: 5px;
+    padding: 5px 15px;
+    margin: 10px;
+}
+
+/*----------------User section-------------------*/
+.user_container{
+    width: 100%;
+    background: linear-gradient(#18122B,#535c91 );
+    display: flex;
+    justify-content: center;
+}
+
+.user_container .container{
+    width: 80%;
+    background: #9290C3;
+    border-radius: 7px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.user_container .container h1{
+    color: rgb(0, 0, 0);
+    font-size: 40px;
+    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif;
+    text-align: center;
+}
+
+.user_container h2{
+    color: rgb(0, 0, 0);
+    font-size: 25px;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+.user_container .container .info{
+    background: rgb(214, 214, 214);
+    border-radius: 7px;
+    padding: 20px;
+}
+
+.user_container .container .info p{
+    color: #181818;
+    font-size: 17px;
+    font-family: "Josefin Slab", serif;
+    font-weight: 500;
+}
+
+.user_container .films_watchlist{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.films_watchlist .container_film{
+    width: 180px;
+    height: 260px;
+    margin: 5px;
+    border-radius: 7px;
+    position: relative;
+    transition: none;
+}
+
+.films_watchlist .container_film img{
+    width: 100%;
+    margin: 5px;
+    border-radius: 7px;
+    transition: none;
+}
+
+.sign_out{
+    margin: 0px 10px;
+}

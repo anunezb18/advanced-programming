@@ -1,0 +1,30 @@
+{% for film in watchlist %}
+<div class="container_film">
+    <img src={% static  film.image %}  alt="poster ">
+    <div class="info_film">
+        <h3 class="text_film">{{ film.name }}</h3>
+        <p class="p_film">
+            {% if film.stars == "1" %}
+            <i class="fa-solid fa-star"></i>
+            {% elif film.stars == "2" %}
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            {% elif film.stars == "3" %}
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            {% elif film.stars == "4" %}
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            {% elif film.stars == "5" %}
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            {% endif%}</p>
+    </div>
+</div>
+{% endfor %}
