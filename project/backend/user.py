@@ -12,6 +12,7 @@ from pydantic import BaseModel
 from db_connection import PostgresConnection
 from film import Film
 from review import Review
+from reply import Reply
 
 
 engine = create_engine('postgresql://ud_admin:Admin12345@localhost:5430/udproject2')
@@ -26,7 +27,7 @@ class User(BaseModel):
     name: str
     rated_films: List[Film]
     reviews: List[Review]
-    replies: str
+    replies: List[Reply]
     fav_films: List[Film]
     watchlist: List[Film]
 
@@ -148,6 +149,7 @@ class UserDB(Base):
     username = Column(String, primary_key=True)
     password = Column(String)
     email = Column(String)
+    name = Column(String)
     rated_films = Column(String)
     reviews = Column(String)
     replies = Column(String)
