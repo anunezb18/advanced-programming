@@ -24,11 +24,11 @@ def register_user(user: User = Body(...)):
         password=user.password,
         email=user.email,
         name=user.name,
-        rated_films=user.rated_films,
-        reviews=user.reviews,
-        replies=user.replies,
-        fav_films=user.fav_films,
-        watchlist=user.watchlist,
+        rated_films=None,
+        reviews=None,
+        replies=None,
+        fav_films=None,
+        watchlist=None,
     )
     session_maker = sessionmaker(bind=engine)
     session = session_maker()
