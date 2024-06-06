@@ -236,8 +236,7 @@ html, body{
     transition: ease all 0.5s;
 }
 
-/*--------------------Review Section------------------*/
-
+/*--------------------Review Section------------------*/ 
 .review_section .container .reviews .container_review{
     width: 48%;
     height: auto;
@@ -248,6 +247,17 @@ html, body{
     border-radius: 5px;
     background-color: #9290C3;
     margin: 5px;
+    transition: ease all 0.5s;
+}
+
+.review_section .container .reviews :hover{
+    background-color: #9290c3c4;
+    transition: ease all 0.5s;
+}
+
+.review_section .container .reviews .container_review :hover{
+    background-color: #9290c300;
+    transition: ease all 0.5s;
 }
 
 .review_section .container .container_review .img_review img{
@@ -262,7 +272,7 @@ html, body{
 }
 
 .text_review h3{
-    color: #18122B;
+    color: #0c0916;
     font-size: 20px;
     font-family: "Josefin Sans", sans-serif;
     margin: 0px;

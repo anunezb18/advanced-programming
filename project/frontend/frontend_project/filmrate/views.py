@@ -7,7 +7,7 @@ def index(request):
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "5",
-            "image": "images/1.png"
+            "image": "images/5.png"
         },
         {
             "name": "Infinity war",
@@ -19,13 +19,13 @@ def index(request):
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "1",
-            "image": "images/3.png"
+            "image": "images/1.png"
         },
         {
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "3",
-            "image": "images/5.png"
+            "image": "images/3.png"
         },
         {
             "name": "Infinity war",
@@ -55,6 +55,9 @@ def create_account(request):
 def films(request):
     return render(request, 'films.html')
 
+def films_user(request):
+    return render(request, 'films_user.html')
+
 def film(request):
     return render(request, 'film_template.html')
 
@@ -76,25 +79,25 @@ def my_watchlist(request):
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "1",
-            "image": "images/3.png"
+            "image": "images/1.png"
         },
         {
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "3",
-            "image": "images/5.png"
+            "image": "images/1.png"
         },
         {
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "2",
-            "image": "images/2.png"
+            "image": "images/1.png"
         },
         {
             "name": "Infinity war",
             "description": "It's a movie of marvel studios",
             "stars": "5",
-            "image": "images/4.png"
+            "image": "images/1.png"
         }
     ]
     return render(request, 'my_watchlist.html', {"watchlist": watchlist})
