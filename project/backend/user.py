@@ -24,7 +24,6 @@ class User(BaseModel):
     username: str
     password: str
     email: str
-    name: str
     rated_films: List[Film]
     reviews: List[Review]
     replies: List[Reply]
@@ -43,7 +42,6 @@ class User(BaseModel):
             username=self.username,
             password=self.password,
             email=self.email,
-            name=self.name,
             rated_films=self.rated_films,
             reviews=self.reviews,
             replies=self.replies,
@@ -149,7 +147,6 @@ class UserDB(Base):
     username = Column(String, primary_key=True)
     password = Column(String)
     email = Column(String)
-    name = Column(String)
     rated_films = Column(String)
     reviews = Column(String)
     replies = Column(String)

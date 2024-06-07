@@ -42,7 +42,7 @@ class Catalog(BaseModel):
         return cls.catalog_films
 
     @classmethod
-    def add_videogame(cls, film: Film):
+    def add_films(cls, film: Film):
         """
         This method adds a film to the catalog list.
 
