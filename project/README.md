@@ -10,7 +10,7 @@ This is an application to rate, review and add films to watchlist. The project i
 
 ## Class Diagram
 
-![Class-Diagram](github.com/anunezb18/advanced-programming/tree/main/project/docs/class_diagram.png)
+![Diagrama de Clases](https://raw.githubusercontent.com/anunezb18/advanced-programming/main/project/docs/class_diagram.jpg)
 
 ## Stakeholders
 
