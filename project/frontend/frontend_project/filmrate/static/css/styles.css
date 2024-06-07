@@ -230,7 +230,7 @@ html, body{
     transition: ease all 0.5s;
 }
 
-.see_btn a:hover {
+.see_btn a:hover{
     color: #000;
     background-color: #ffffff;
     transition: ease all 0.5s;
