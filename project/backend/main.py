@@ -1,7 +1,6 @@
 """This file  has theentry point implementtion for RESTapi services."""
 
 from typing import List
-import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
@@ -177,7 +176,3 @@ def add_film_to_catalog(film: Film = Body(...)):
     session.commit()
 
     return {"message": "Film added to catalog successfully"}
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
