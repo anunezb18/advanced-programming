@@ -9,13 +9,14 @@ from typing import List
 from sqlalchemy import Column, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from pydantic import BaseModel
-from db_connection import PostgresConnection
 from film import Film
 from review import Review
 from reply import Reply
 
 
-engine = create_engine('postgresql://ud_admin:Admin12345@localhost:5430/udproject2')
+engine_users = create_engine("postgresql://postgres:Bullrock@localhost:5432/project-users")
+
+
 class User(BaseModel):
     """
     This class control the behavior of the User class
@@ -34,19 +35,17 @@ class User(BaseModel):
         """
         This function adds a user to the database
         """
-        connection = PostgresConnection(
-            "ud_admin", "Admin12345", "localhost", "5430", "udproject2"
-        )
-        session = connection.session()
+        session_maker = sessionmaker(bind=engine_users)
+        session = session_maker()
         user_db = UserDB(
             username=self.username,
             password=self.password,
             email=self.email,
-            rated_films=self.rated_films,
-            reviews=self.reviews,
-            replies=self.replies,
-            fav_films=self.fav_films,
-            watchlist=self.watchlist,
+            rated_films=[],
+            reviews=[],
+            replies=[],
+            fav_films=[],
+            watchlist=[],
         )
         session.add(user_db)
         session.commit()
@@ -60,18 +59,20 @@ class User(BaseModel):
             username (str): the username of the user
             password (str): the password of the user
         """
-        Session = sessionmaker(bind=engine) # pylint: disable=invalid-name
+        Session = sessionmaker(bind=engine_users)  # pylint: disable=invalid-name
         session = Session()
-        user_db = session.query(UserDB).filter_by(username=username, password=password).first()
+        user_db = (
+            session.query(UserDB)
+            .filter_by(username=username, password=password)
+            .first()
+        )
         session.close()
 
         # If a user was found and the passwords match, return True
         if user_db is not None:
             return True
-         # If no user was found or the passwords don't match, return False
+        # If no user was found or the passwords don't match, return False
         return False
-
-
 
     def has_watched_film(self, film: Film) -> bool:
         """
@@ -126,11 +127,12 @@ class User(BaseModel):
         This method returns the user's reviews
         """
         return self.reviews
-    
+
     class Config:
         """
         Pydantic configurarion for ORM mode
         """
+
         from_attributes = True
 
 
@@ -142,13 +144,17 @@ class UserDB(Base):
     This class represents the behavior of the User in the database
     """
 
-    __tablename__ = "users"
+    __tablename__ = "Users"
 
     username = Column(String, primary_key=True)
     password = Column(String)
     email = Column(String)
     rated_films = Column(String)
     reviews = Column(String)
-    replies = Column(String)
     fav_films = Column(String)
     watchlist = Column(String)
+
+class LoginModel(BaseModel):
+    """This class represents the login model"""
+    username: str
+    password: str

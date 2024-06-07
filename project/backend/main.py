@@ -1,36 +1,35 @@
 """This file  has theentry point implementtion for RESTapi services."""
 
 from typing import List
+import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from film import Film, FilmDB
 from review import Review
-from user import User, UserDB
+from user import User, UserDB, LoginModel
 
 app = FastAPI()
 
-engine = create_engine("postgresql://ud_admin:Admin12345@localhost:5430/udproject2")
-engine2 = create_engine("postgresql://ud_admin:Admin12345@localhost:5432/udproject")
-
+engine_users = create_engine("postgresql://postgres:Bullrock@localhost:5432/project-users")
+engine_films = create_engine("postgresql://postgres:Bullrock@localhost:5432/films")
 
 @app.post("/users/register")
 def register_user(user: User = Body(...)):
     """This method registers a new user"""
 
+    session_maker = sessionmaker(bind=engine_users)
+    session = session_maker()
+
+    existing_user = session.query(UserDB).filter_by(username=user.username).first()
+    if existing_user is not None:
+        return {"message": "Username is already in use. Please choose another one."}
+
     new_user = UserDB(
         username=user.username,
         password=user.password,
         email=user.email,
-        name=user.name,
-        rated_films=None,
-        reviews=None,
-        replies=None,
-        fav_films=None,
-        watchlist=None,
     )
-    session_maker = sessionmaker(bind=engine)
-    session = session_maker()
     session.add(new_user)
     session.commit()
     session.close()
@@ -38,21 +37,20 @@ def register_user(user: User = Body(...)):
 
 
 @app.post("/users/login")
-def login_user(username: str, password: str):
+def login(user: LoginModel):
     """This method logs in a user"""
+    dbusername = user.username
+    dbpassword = user.password
 
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=engine_users)
     session = session_maker()
-    user_db = (
-        session.query(UserDB).filter_by(username=username, password=password).first()
-    )
+    user_db = session.query(UserDB).filter_by(username=dbusername).first()
     session.close()
 
-    # If a user was found and the passwords match, return True
-    if user_db is not None:
-        return True
-    # If no user was found or the passwords don't match, return False
-    return False
+    if user_db is not None and user_db.password == dbpassword:
+        return {"message": "User logged in successfully"}
+
+    raise HTTPException(status_code=401, detail="Invalid username or password")
 
 
 @app.get("/films", response_model=List[Film])
@@ -64,7 +62,7 @@ def search_films(title: str):
             status_code=400, detail="Title must not be empty or only whitespace"
         )
 
-    session_maker = sessionmaker(bind=engine2)
+    session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
     films = session.query(Film).filter(Film.title.contains(title)).all()
     session.close()
@@ -76,7 +74,7 @@ def search_films(title: str):
 def get_film_details(film_id: int):
     """This method returns all the details of a film"""
 
-    session_maker = sessionmaker(bind=engine2)
+    session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
     film = session.query(Film).filter(Film.id == film_id).first()
     session.close()
@@ -91,7 +89,7 @@ def get_film_details(film_id: int):
 def add_film_review(film_id: int, review: Review = Body(...)):
     """This method adds a review to a film"""
 
-    session_maker = sessionmaker(bind=engine2)
+    session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
     film = session.query(Film).filter(Film.id == film_id).first()
 
@@ -117,7 +115,7 @@ def add_film_review(film_id: int, review: Review = Body(...)):
 def get_film_reviews(film_id: int):
     """This method returns all the reviews of a film"""
 
-    session_maker = sessionmaker(bind=engine2)
+    session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
     film = session.query(Film).filter(Film.id == film_id).first()
     session.close()
@@ -132,7 +130,7 @@ def get_film_reviews(film_id: int):
 def add_film_to_watchlist(user_id: int, film_id: int = Body(...)):
     """This method adds a film to a user's watchlist"""
 
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=engine_users)
     session = session_maker()
     user = session.query(User).filter(User.username == user_id).first()
 
@@ -169,10 +167,14 @@ def add_film_to_catalog(film: Film = Body(...)):
         crew=film.crew,
     )
 
-    session_maker = sessionmaker(bind=engine)
+    session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
 
     session.add(new_film)
     session.commit()
 
     return {"message": "Film added to catalog successfully"}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8080)
+
