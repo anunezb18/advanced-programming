@@ -7,7 +7,7 @@ This file contains the class Film
 
 from typing import List
 from pydantic import BaseModel
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, ARRAY
 from sqlalchemy.orm import declarative_base
 from db_connection import PostgresConnection
 from rating import Rating
@@ -25,7 +25,7 @@ class Film(BaseModel):
     ratings: List[Rating]
     reviews: List[Review]
     lenght: str
-    crew: List[str]
+    crew: str
 
     def add_to_db(self):
         """
@@ -65,7 +65,7 @@ class FilmDB(Base):
     This class represents the behavior of the film in the database
     """
 
-    __tablename__ = "films"
+    __tablename__ = "Films"
 
     title = Column(String)
     code = Column(Integer, primary_key=True)
@@ -73,6 +73,10 @@ class FilmDB(Base):
     year = Column(Integer)
     synopsis = Column(String)
     ratings = Column(String)
-    reviews = Column(String)
+    reviews = Column(ARRAY(String))
     lenght = Column(String)
     crew = Column(String)
+
+class SearchModel(BaseModel):
+    """Class to represent the search model for the films"""
+    title: str

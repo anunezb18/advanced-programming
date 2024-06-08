@@ -5,14 +5,19 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from film import Film, FilmDB
+from film import Film, FilmDB, SearchModel
 from review import Review
 from user import User, UserDB, LoginModel
 
 app = FastAPI()
 
-engine_users = create_engine("postgresql://postgres:Bullrock@localhost:5432/project-users")
-engine_films = create_engine("postgresql://postgres:Bullrock@localhost:5432/films")
+engine_users = create_engine(
+    "postgresql://postgres:Bullrock@localhost:5432/project-users"
+)
+engine_films = create_engine(
+    "postgresql://postgres:Bullrock@localhost:5432/project-films"
+)
+
 
 @app.post("/users/register")
 def register_user(user: User = Body(...)):
@@ -53,19 +58,21 @@ def login(user: LoginModel):
     raise HTTPException(status_code=401, detail="Invalid username or password")
 
 
-@app.get("/films", response_model=List[Film])
-def search_films(title: str):
+@app.post("/films/search", response_model=List[Film])
+def search_films(search: SearchModel):
     """This method search a film by the title"""
 
-    if not title.strip():
+    if not search.title.strip():
         raise HTTPException(
             status_code=400, detail="Title must not be empty or only whitespace"
         )
 
     session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
-    films = session.query(Film).filter(Film.title.contains(title)).all()
+    films_db = session.query(FilmDB).filter(FilmDB.title.contains(search.title)).all()
     session.close()
+
+    films = [Film(**film_db.__dict__) for film_db in films_db]
 
     return films
 
@@ -76,7 +83,7 @@ def get_film_details(film_id: int):
 
     session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
-    film = session.query(Film).filter(Film.id == film_id).first()
+    film = session.query(FilmDB).filter(FilmDB.code == str(film_id)).first()
     session.close()
 
     if film is None:
@@ -88,23 +95,21 @@ def get_film_details(film_id: int):
 @app.post("/films/{film_id}/review")
 def add_film_review(film_id: int, review: Review = Body(...)):
     """This method adds a review to a film"""
-
     session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
-    film = session.query(Film).filter(Film.id == film_id).first()
+    film = session.query(FilmDB).filter(FilmDB.code == str(film_id)).first()
 
     if film is None:
         session.close()
         raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
 
-    new_review = Review(
-        username=review.username,
-        text=review.text,
-        likes=None,
-        replies=None,
-    )
+    new_review = f"{review.username}: {review.text}"  
 
-    film.reviews.append(new_review)
+    if not film.reviews or film.reviews == "{}":
+        film.reviews = [new_review]
+    else:
+        film.reviews.append(new_review)
+
     session.commit()
     session.close()
 
@@ -117,39 +122,13 @@ def get_film_reviews(film_id: int):
 
     session_maker = sessionmaker(bind=engine_films)
     session = session_maker()
-    film = session.query(Film).filter(Film.id == film_id).first()
+    film = session.query(Film).filter(Film.code == film_id).first()
     session.close()
 
     if film is None:
         raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
 
     return film.reviews
-
-
-@app.post("/users/{user_id}/watchlist")
-def add_film_to_watchlist(user_id: int, film_id: int = Body(...)):
-    """This method adds a film to a user's watchlist"""
-
-    session_maker = sessionmaker(bind=engine_users)
-    session = session_maker()
-    user = session.query(User).filter(User.username == user_id).first()
-
-    if user is None:
-        session.close()
-        raise HTTPException(status_code=404, detail=f"User with id {user_id} not found")
-
-    film = session.query(Film).filter(Film.id == film_id).first()
-
-    if film is None:
-        session.close()
-        raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
-
-    user.watchlist.append(film)
-    session.commit()
-    session.close()
-
-    return {"message": "Film added to watchlist successfully"}
-
 
 @app.post("/admin/films")
 def add_film_to_catalog(film: Film = Body(...)):
@@ -175,6 +154,6 @@ def add_film_to_catalog(film: Film = Body(...)):
 
     return {"message": "Film added to catalog successfully"}
 
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080)
-

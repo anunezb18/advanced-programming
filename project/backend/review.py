@@ -5,17 +5,15 @@ This file contains the class Review
 <anunezb@udistrital.edu.co>
 """
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 from reply import Reply
 
 
 class Review(BaseModel):
-    """
-    This class control the behavior of the User class
-    """
+    """This class represents the behavior of review"""
 
     username: str
     text: str
-    likes: int
-    replies: List[Reply]
+    likes: Optional[int] = None
+    replies: Optional[List[Reply]] = None
