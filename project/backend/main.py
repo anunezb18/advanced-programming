@@ -5,7 +5,7 @@ import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from film import Film, FilmDB, SearchModel
+from film import Film, FilmDB, SearchModel, AddToWatchlistModel
 from review import Review
 from user import User, UserDB, LoginModel
 
@@ -103,7 +103,7 @@ def add_film_review(film_id: int, review: Review = Body(...)):
         session.close()
         raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
 
-    new_review = f"{review.username}: {review.text}"  
+    new_review = f"{review.username}: {review.text}"
 
     if not film.reviews or film.reviews == "{}":
         film.reviews = [new_review]
@@ -116,19 +116,45 @@ def add_film_review(film_id: int, review: Review = Body(...)):
     return {"message": "Review added successfully"}
 
 
-@app.get("/films/{film_id}/reviews", response_model=List[Review])
-def get_film_reviews(film_id: int):
-    """This method returns all the reviews of a film"""
+@app.post("/users/add_to_watchlist")
+def add_to_watchlist(item: AddToWatchlistModel):
+    """This method adds a movie to a user's watchlist"""
+    dbusername = item.username
+    film_id = item.film_id
+    film_title = item.film_title
 
-    session_maker = sessionmaker(bind=engine_films)
+    session_maker = sessionmaker(bind=engine_users)
     session = session_maker()
-    film = session.query(Film).filter(Film.code == film_id).first()
+    user_db = session.query(UserDB).filter_by(username=dbusername).first()
+
+    if user_db is None:
+        session.close()
+        raise HTTPException(status_code=404, detail="User not found")
+
+    film_info = f"Title: {film_title}, Code: {film_id}"
+    if not user_db.watchlist or user_db.watchlist == "{}":
+        user_db.watchlist = [film_info]
+    else:
+        user_db.watchlist.append(film_info)
+    session.commit()
+
     session.close()
+    return {"message": "Film added to watchlist successfully"}
 
-    if film is None:
-        raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
+@app.get("/users/{username}/watchlist")
+def get_watchlist(username: str):
+    """This method returns a user's watchlist"""
+    session_maker = sessionmaker(bind=engine_users)
+    session = session_maker()
+    user_db = session.query(UserDB).filter_by(username=username).first()
 
-    return film.reviews
+    if user_db is None:
+        session.close()
+        raise HTTPException(status_code=404, detail="User not found")
+
+    watchlist = user_db.watchlist
+    session.close()
+    return {"watchlist": watchlist}
 
 @app.post("/admin/films")
 def add_film_to_catalog(film: Film = Body(...)):

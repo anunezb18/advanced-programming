@@ -5,7 +5,7 @@ This file contains the class Film
 <anunezb@udistrital.edu.co>
 """
 
-from typing import List
+from typing import List, Optional
 from pydantic import BaseModel
 from sqlalchemy import Column, String, Integer, ARRAY
 from sqlalchemy.orm import declarative_base
@@ -22,8 +22,8 @@ class Film(BaseModel):
     director: str
     year: int
     synopsis: str
-    ratings: List[Rating]
-    reviews: List[Review]
+    ratings: Optional[List[Rating]] = []
+    reviews: Optional[List[Review]] = []
     lenght: str
     crew: str
 
@@ -80,3 +80,9 @@ class FilmDB(Base):
 class SearchModel(BaseModel):
     """Class to represent the search model for the films"""
     title: str
+
+class AddToWatchlistModel(BaseModel):
+    """Class to represent the model to add a film to the watchlist of a user"""
+    username: str
+    film_id: int
+    film_title: str

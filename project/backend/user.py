@@ -5,7 +5,7 @@ This file contains the class User
 <anunezb@udistrital.edu.co>
 """
 
-from typing import List
+from typing import List, Optional
 from sqlalchemy import Column, String, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 from pydantic import BaseModel
@@ -25,11 +25,11 @@ class User(BaseModel):
     username: str
     password: str
     email: str
-    rated_films: List[Film]
-    reviews: List[Review]
-    replies: List[Reply]
-    fav_films: List[Film]
-    watchlist: List[Film]
+    rated_films: Optional[List[Film]] = []
+    reviews: Optional[List[Review]] = []
+    replies: Optional[List[Reply]] = []
+    fav_films: Optional[List[Film]] = []
+    watchlist: Optional[List[Film]] = []
 
     def add_to_db(self):
         """
