@@ -1,7 +1,6 @@
 """This file  has theentry point implementtion for RESTapi services."""
 
 from typing import List
-import uvicorn
 from fastapi import Body, FastAPI, HTTPException
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
@@ -115,6 +114,7 @@ def add_film_review(film_id: int, review: Review = Body(...)):
 
     return {"message": "Review added successfully"}
 
+
 @app.get("/films/{film_id}/reviews")
 def get_film_reviews(film_id: int):
     """This method returns the reviews of a film"""
@@ -129,6 +129,7 @@ def get_film_reviews(film_id: int):
     reviews = film.reviews
     session.close()
     return {"reviews": reviews}
+
 
 @app.post("/users/add_to_watchlist")
 def add_to_watchlist(item: AddToWatchlistModel):
@@ -155,6 +156,7 @@ def add_to_watchlist(item: AddToWatchlistModel):
     session.close()
     return {"message": "Film added to watchlist successfully"}
 
+
 @app.get("/users/{username}/watchlist")
 def get_watchlist(username: str):
     """This method returns a user's watchlist"""
@@ -169,6 +171,7 @@ def get_watchlist(username: str):
     watchlist = user_db.watchlist
     session.close()
     return {"watchlist": watchlist}
+
 
 @app.post("/admin/films")
 def add_film_to_catalog(film: Film = Body(...)):
