@@ -6,7 +6,7 @@ This file contains the class User
 """
 
 from typing import List, Optional
-from sqlalchemy import Column, String, create_engine
+from sqlalchemy import Column, String, create_engine, ARRAY
 from sqlalchemy.orm import declarative_base, sessionmaker
 from pydantic import BaseModel
 from film import Film
@@ -149,10 +149,10 @@ class UserDB(Base):
     username = Column(String, primary_key=True)
     password = Column(String)
     email = Column(String)
-    rated_films = Column(String)
-    reviews = Column(String)
-    fav_films = Column(String)
-    watchlist = Column(String)
+    rated_films = Column(ARRAY(String))
+    reviews = Column(ARRAY(String))
+    fav_films = Column(ARRAY(String))
+    watchlist = Column(ARRAY(String))
 
 class LoginModel(BaseModel):
     """This class represents the login model"""

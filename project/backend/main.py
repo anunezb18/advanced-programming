@@ -115,6 +115,20 @@ def add_film_review(film_id: int, review: Review = Body(...)):
 
     return {"message": "Review added successfully"}
 
+@app.get("/films/{film_id}/reviews")
+def get_film_reviews(film_id: int):
+    """This method returns the reviews of a film"""
+    session_maker = sessionmaker(bind=engine_films)
+    session = session_maker()
+    film = session.query(FilmDB).filter(FilmDB.code == str(film_id)).first()
+
+    if film is None:
+        session.close()
+        raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
+
+    reviews = film.reviews
+    session.close()
+    return {"reviews": reviews}
 
 @app.post("/users/add_to_watchlist")
 def add_to_watchlist(item: AddToWatchlistModel):
@@ -179,7 +193,3 @@ def add_film_to_catalog(film: Film = Body(...)):
     session.commit()
 
     return {"message": "Film added to catalog successfully"}
-
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)

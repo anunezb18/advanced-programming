@@ -72,7 +72,7 @@ class FilmDB(Base):
     director = Column(String)
     year = Column(Integer)
     synopsis = Column(String)
-    ratings = Column(String)
+    ratings = Column(ARRAY(String))
     reviews = Column(ARRAY(String))
     lenght = Column(String)
     crew = Column(String)
