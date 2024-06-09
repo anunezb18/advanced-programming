@@ -7,7 +7,7 @@ services:
       - db_data_ap:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Bullrock
+      POSTGRES_PASSWORD: 123
     networks:
       - local
 

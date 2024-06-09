@@ -1,6 +1,6 @@
-const URL_BASE = 'http://localhost:8000'; // URL del contenedor FastAPI
+const URL_BASE = 'http://localhost:8080'; // URL del contenedor FastAPI
 
-async function createUser() {
+async function hello_ud() {
     try {
         const response = await fetch(URL_BASE + '/hello_ud');
         if (!response.ok) {
@@ -14,29 +14,28 @@ async function createUser() {
     }
 }
 
-async function c() {
+async function createUser() {
     let data = {
-        email: document.getElementById('email').value,
         username: document.getElementById('username').value,
-        password: document.getElementById('password').value
+        password: document.getElementById('password').value,
+        email: document.getElementById('email').value
     };
     console.log(data)
 
     let url_post = URL_BASE + '/users/register'
 
-    try {
-        const response = await fetch(url_post, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:5500',
-                "Access-Control-Allow-Methods": "POST"
-            },
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-        alert(result.message)
-    } catch (error) {
-        console.error('Error:', error);
-    }
+    fetch(url_post, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Success:", data);
+    })
+    .catch((error) => {
+        console.error("Error:", error);
+    });
 }

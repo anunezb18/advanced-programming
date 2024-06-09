@@ -11,12 +11,17 @@ from user import User, UserDB, LoginModel
 app = FastAPI()
 
 engine_users = create_engine(
-    "postgresql://postgres:Bullrock@host.docker.internal:5432/project-users"
+    "postgresql://postgres:123k@host.docker.internal:5432/project-users"
 )
 engine_films = create_engine(
-    "postgresql://postgres:Bullrock@host.docker.internal:5432/project-films"
+    "postgresql://postgres:123@host.docker.internal:5432/project-films"
 )
 
+
+@app.get("/hello_ud")
+def hello_ud():
+    """This is a healthcheck service just to validade is backend is up"""
+    return "Welcome to UD!"
 
 @app.post("/users/register")
 def register_user(user: User = Body(...)):
