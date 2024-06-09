@@ -1,12 +1,24 @@
 version: '3.3'
 
 services:
+  db:
+    image: postgres:latest
+    volumes:
+      - db_data_ap:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Bullrock
+    networks:
+      - local
+
   ap-backend:
     build:
       context: .
       dockerfile: ap_backend.Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     networks:
       - local
 

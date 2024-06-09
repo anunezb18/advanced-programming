@@ -11,10 +11,10 @@ from user import User, UserDB, LoginModel
 app = FastAPI()
 
 engine_users = create_engine(
-    "postgresql://postgres:Bullrock@localhost:5432/project-users"
+    "postgresql://postgres:Bullrock@host.docker.internal:5432/project-users"
 )
 engine_films = create_engine(
-    "postgresql://postgres:Bullrock@localhost:5432/project-films"
+    "postgresql://postgres:Bullrock@host.docker.internal:5432/project-films"
 )
 
 
