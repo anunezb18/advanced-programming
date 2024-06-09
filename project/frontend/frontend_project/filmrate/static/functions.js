@@ -1,59 +1,41 @@
-let URL_BASE = "http://localhost:8080"
+const URL_BASE = 'http://localhost:8000'; // URL del contenedor FastAPI
 
-async function registerUser() {
-    const form = document.getElementById('registerForm');
-    const formData = new FormData(form);
-    const data = {
-        username: formData.get('username'),
-        password: formData.get('password'),
-        email: formData.get('email')
-    };
-
+async function createUser() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/users/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-        alert(result.message);
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error registering user');
-    }
-}
-
-
-
-
-async function callMessage() {
-    try {
-        const response = await fetch(URL_BASE + '/user/login');
+        const response = await fetch(URL_BASE + '/hello_ud');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         const data = await response.text();
         document.getElementById('result').textContent = data;
     } catch (error) {
         console.error('Error:', error);
+        document.getElementById('result').textContent = 'Error fetching data';
     }
 }
 
-async function callTable() {
+async function c() {
+    let data = {
+        email: document.getElementById('email').value,
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+    };
+    console.log(data)
+
+    let url_post = URL_BASE + '/users/register'
+
     try {
-        const response = await fetch(URL_BASE + '/products');
-        const data = await response.json();
-        
-        let table = '<table>';
-        table += '<tr><th>ID</th><th>Name</th><th>Description</th></tr>';
-        
-        data.forEach(item => {
-            table += `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.description}</td></tr>`;
+        const response = await fetch(url_post, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:5500',
+                "Access-Control-Allow-Methods": "POST"
+            },
+            body: JSON.stringify(data)
         });
-        
-        table += '</table>';
-        
-        document.getElementById('result').innerHTML = table;
+        const result = await response.json();
+        alert(result.message)
     } catch (error) {
         console.error('Error:', error);
     }

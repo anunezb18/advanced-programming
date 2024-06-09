@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <script src="static/functions.js"></script>
     <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -26,12 +27,12 @@
                <p class="form_p">Aun no tienes una cuenta? <a href="{% url 'create_account' %}">Create account</a></p>
                <div class="form_container">
                   <div class="form_group">
-                     <input type="text" id="username" class="form_input" placeholder=" ">
+                     <input type="text" id="username_user" class="form_input" placeholder=" ">
                      <label for="username" class="form_label">Username</label>
                      <span class="form_line"></span>
                   </div>
                   <div class="form_group">
-                     <input type="text" id="password" class="form_input" placeholder=" ">
+                     <input type="text" id="password_user" class="form_input" placeholder=" ">
                      <label for="password" class="form_label">Password</label>
                      <span class="form_line"></span>
                   </div>
