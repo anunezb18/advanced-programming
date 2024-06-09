@@ -8,10 +8,6 @@ This is a project to apply different concepts regarding _object-oriented design_
 
 This is an application to rate, review and add films to watchlist. The project is going to consist in a film social media, intended to people who enjoy the art of films. 
 
-## Class Diagram
-
-![Diagrama de Clases](https://raw.githubusercontent.com/anunezb18/advanced-programming/main/project/docs/class_diagram.jpg)
-
 ## Stakeholders
 
   - Users: They are the final users of the platform, who contribute with reviews and rating of each film.
