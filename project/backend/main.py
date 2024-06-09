@@ -93,7 +93,9 @@ def get_film_details(film_id: int):
     if film is None:
         raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
 
-    return film
+    film_dict = {c.name: getattr(film, c.name) for c in FilmDB.__table__.columns}
+
+    return film_dict
 
 
 @app.post("/films/{film_id}/review")
@@ -201,3 +203,20 @@ def add_film_to_catalog(film: Film = Body(...)):
     session.commit()
 
     return {"message": "Film added to catalog successfully"}
+
+
+@app.get("/films")
+def get_all_films():
+    """This method returns all the films in the catalog"""
+
+    session_maker = sessionmaker(bind=engine_films)
+    session = session_maker()
+    films_db = session.query(FilmDB).all()
+    session.close()
+
+    films = [
+        {k: v for k, v in film_db.__dict__.items() if not k.startswith("_")}
+        for film_db in films_db
+    ]
+
+    return films
