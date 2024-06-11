@@ -10,5 +10,7 @@ urlpatterns = [
     path('films_user/', views.films_user, name='films_user'),
     path('my_watchlist/', views.my_watchlist, name='my_watchlist'),
     path('user/', views.user, name='user'),
-    path('film/', views.film, name='film'),
+
+    path('details_film/', views.details_film, name='details_film'),
+
 ]

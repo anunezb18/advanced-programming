@@ -54,11 +54,12 @@ def create_account(request):
 def films(request):
     return render(request, 'films.html')
 
+def details_film(request):
+    return render(request, 'film_template.html')
+
 def films_user(request):
     return render(request, 'films_user.html')
 
-def film(request):
-    return render(request, 'film_template.html')
 
 def my_watchlist(request):
     watchlist = [

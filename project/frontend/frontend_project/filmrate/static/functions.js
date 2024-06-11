@@ -156,7 +156,7 @@ async function searchFilmHome() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -214,7 +214,7 @@ async function searchFilmUser() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a class="name_film" href="" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -272,7 +272,7 @@ async function searchFilmWatchlist() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -330,7 +330,7 @@ async function searchFilm() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -373,7 +373,7 @@ async function films() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -387,6 +387,53 @@ async function films() {
         console.error('Error:', error);
     }
 }
+
+async function filmID(filmId) {
+        localStorage.setItem('filmId', filmId);
+}
+
+async function detailsFilm(film_code){
+    try{
+        const response = await fetch(URL_BASE + `/films/${film_code}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+    
+        const filmData = await response.json();
+            
+        console.log(filmData);
+        let info = "";
+        let img = "";
+
+        img += `<div class="film_img">
+                    <img src="${filmData.cover}" alt="poster film">
+                </div>`
+
+        info += `<div class="film_info">
+                    <div class="film_title">
+                        <h3>${filmData.title}</h3>
+                    </div>
+                    <div class="rating">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="film_descrition">${filmData.synopsis}</p>
+                </div>`;
+
+        document.getElementById('details_img').innerHTML = img;
+        document.getElementById('details_info').innerHTML = info;
+
+    }catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+
 
 
 async function infoUser(){
@@ -452,12 +499,12 @@ async function getWatchlist(username) {
         let film = "";
 
         // Iterate over each film data and create HTML elements for each film.
-        watchlist.forEach(item => {
-        console.log(item.title); // Log the title of each film for verification.
-        film += `<div class="container_film">
-                        <img src="${item.cover}" alt="pelicula">
+        watchlist.forEach(data => {
+            console.log(data.title); // Log the title of each film for verification.
+            film += `<div class="container_film">
+                        <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${item.code})">${item.title}</a></h3>
+                            <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -472,33 +519,33 @@ async function getWatchlist(username) {
 }
 
 
-async function detailsFilm(codigo){
-    try{
-        const response = await fetch(URL_BASE + '/', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify()
-        });
+// async function detailsFilm(codigo){
+//     try{
+//         const response = await fetch(URL_BASE + '/', {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify()
+//         });
 
-        const data = await response.json();
-        let film = "";
+//         const data = await response.json();
+//         let film = "";
 
-        data.forEach(data => {
-            console.log(data.title)
-            film += `<div class="container_film">
-                        <img src="${data.poster}" alt="poster film">
-                        <div class="info_film">
-                            <h3 class="text_film"><a href="">${data.title}</a></h3>
-                            <p class="p_film"></p>
-                        </div>
-                    </div>`;
-        });
+//         data.forEach(data => {
+//             console.log(data.title)
+//             film += `<div class="container_film">
+//                         <img src="${data.poster}" alt="poster film">
+//                         <div class="info_film">
+//                             <h3 class="text_film"><a href="">${data.title}</a></h3>
+//                             <p class="p_film"></p>
+//                         </div>
+//                     </div>`;
+//         });
 
-        document.getElementById('container_films').innerHTML = film;
+//         document.getElementById('container_films').innerHTML = film;
         
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
