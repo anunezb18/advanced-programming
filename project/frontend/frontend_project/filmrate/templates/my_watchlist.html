@@ -23,61 +23,49 @@
     <!-- banner section start -->
      <div class="banner_section banner_watchlist">
            <div class="container">
-                <h1 class="banner_title">Wellcome back, username</h1>
+            <h1 class="banner_title" id="username_banner">Wellcome</h1>
                 <p class="banner_text">What film do you want search?</p>
                 <div class="search">
-                    <input type="text" placeholder="Search film...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search film..." id="title">
+                    <i class="fa-solid fa-magnifying-glass" onclick="searchFilmWatchlist()"></i>
                 </div>
            </div>
      </div>
     <!-- banner section end -->
-    <!-- films section end -->
-    <div class="films_section watchlist">
+    <!-- found films start -->
+    <div class="films_section films_home found_films">
         <div class="container">
             <div class="title">
-                <h2>Your watchlist</h2>
+                <h4 id="found_films"></h4>
             </div>
-            <div class="films">
-                {% for film in watchlist %}
-                <div class="container_film">
-                    <img src={% static  film.image %}  alt="poster ">
-                <div class="info_film">
-                <h3 class="text_film">{{ film.name }}</h3>
-                <p class="p_film">
-                    {% if film.stars == "1" %}
-                    <i class="fa-solid fa-star"></i>
-                    {% elif film.stars == "2" %}
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    {% elif film.stars == "3" %}
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    {% elif film.stars == "4" %}
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    {% elif film.stars == "5" %}
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    {% endif%}
-                </p>
-    </div>
-</div>
-{% endfor %}
-            </div>
-            <div class="see_btn"><a href="{% url 'films' %}">Add More Films</a></div>
+            <p id="displayMessage"></p>
+            <div id="peliculas" class="films"></div>
         </div>
     </div>
+    <!-- found films section end -->
+    <!-- films section end -->
+    <div class="films_section films_home">
+        <div class="container">
+            <div class="title">
+                <h2>Your Watchlist</h2>
+            </div>
+            <div class="films" id="container_watchlist">
+            </div>
+            <div class="see_btn"><a href="#">Search Film</a></div>
+        </div>
+    </div>
+    <!--<div class="see_btn"><a href="#">Add More Films</a></div>-->
     <!-- films section end -->
     <!-- footer  section start -->
     {% include "footer.html" %}
     <!-- footer  section end -->
+
+    <script>
+        const username = localStorage.getItem('username');
+        console.log(username);
+        document.getElementById('username_banner').textContent = 'Wellcome back, ' + username;
+        getWatchlist(username)
+    </script>
 
 </body>
 </html>

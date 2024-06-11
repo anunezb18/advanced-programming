@@ -186,7 +186,7 @@ html, body{
     top: 5px;
     left: 5px;
     visibility: hidden;
-    background-color: rgba(0, 0, 0, 0.699);
+    background-color: rgba(0, 0, 0, 0.699); 
     color: white;
     padding: 5px 10px;
     border-radius: 7px;
@@ -202,6 +202,13 @@ html, body{
     font-family: "Josefin Sans", sans-serif;
     font-size: 20px;
     margin: 0;
+    color: white !important;
+    text-decoration: none;
+}
+
+a.name_film {
+    color: white !important;
+    text-decoration: none;
 }
 
 .container_film:hover .info_film {

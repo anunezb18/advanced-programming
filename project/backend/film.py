@@ -87,4 +87,3 @@ class AddToWatchlistModel(BaseModel):
     """Class to represent the model to add a film to the watchlist of a user"""
     username: str
     film_id: int
-    film_title: str

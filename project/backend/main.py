@@ -6,8 +6,9 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from film import Film, FilmDB, SearchModel, AddToWatchlistModel
 from review import Review
-from user import User, UserDB, LoginModel
+from user import User, UserDB, LoginModel, getWatchlistModel
 from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
@@ -154,10 +155,10 @@ def get_film_reviews(film_id: int):
 
 @app.post("/users/add_to_watchlist")
 def add_to_watchlist(item: AddToWatchlistModel):
+    
     """This method adds a movie to a user's watchlist"""
     dbusername = item.username
     film_id = item.film_id
-    film_title = item.film_title
 
     session_maker = sessionmaker(bind=engine_users)
     session = session_maker()
@@ -167,31 +168,38 @@ def add_to_watchlist(item: AddToWatchlistModel):
         session.close()
         raise HTTPException(status_code=404, detail="User not found")
 
-    film_info = f"Title: {film_title}, Code: {film_id}"
-    if not user_db.watchlist or user_db.watchlist == "{}":
-        user_db.watchlist = [film_info]
+    if not user_db.watchlist or user_db.watchlist == [""]:
+        user_db.watchlist = [film_id]
     else:
-        user_db.watchlist.append(film_info)
+        user_db.watchlist = user_db.watchlist + [film_id]
+
     session.commit()
-
     session.close()
-    return {"message": "Film added to watchlist successfully"}
+    return {"message": "Film added to watchlist successfully"}
 
 
-@app.get("/users/{username}/watchlist")
-def get_watchlist(username: str):
+@app.post("/users/watchlist", response_model=List[Film])
+def get_watchlist(user: getWatchlistModel):
     """This method returns a user's watchlist"""
+    dbusername = user.username
+
     session_maker = sessionmaker(bind=engine_users)
     session = session_maker()
-    user_db = session.query(UserDB).filter_by(username=username).first()
+    user_db = session.query(UserDB).filter_by(username=dbusername).first()
 
     if user_db is None:
         session.close()
         raise HTTPException(status_code=404, detail="User not found")
 
-    watchlist = user_db.watchlist
+    session_maker2 = sessionmaker(bind=engine_films)
+    session2 = session_maker2()
+    films_db = session2.query(FilmDB).filter(FilmDB.code.in_(user_db.watchlist)).all()
+
+    watchlist = [Film(**film_db.__dict__) for film_db in films_db]
+
+    session2.close()
     session.close()
-    return {"watchlist": watchlist}
+    return watchlist
 
 
 @app.post("/admin/films")

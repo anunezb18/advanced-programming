@@ -158,3 +158,7 @@ class LoginModel(BaseModel):
     """This class represents the login model"""
     username: str
     password: str
+
+class getWatchlistModel(BaseModel):
+    """This class represents the model to get the watchlist of a user"""
+    username: str

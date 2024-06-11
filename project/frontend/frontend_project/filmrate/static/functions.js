@@ -214,7 +214,7 @@ async function searchFilmUser() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film"><a class="name_film" href="" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -229,6 +229,63 @@ async function searchFilmUser() {
     }
 }
 
+// Search for the films
+async function searchFilmWatchlist() {
+
+    // Retrieve the value of the input field with the id 'title' from the HTML document.
+    const title = document.getElementById('title').value;
+    
+    // Check if the title is empty or only whitespace.
+    if (!title.trim()) {
+        alert("Title must not be empty or only whitespace");
+        return; // Exit the function if the title is invalid.
+    }
+    
+    try {
+        // Send an HTTP POST request to the server to search for films by title.
+        const response = await fetch(URL_BASE + '/films/search', {
+            method: 'POST', // Define the HTTP method as POST.
+            headers: {
+                'Content-Type': 'application/json' // Specify that the request content is JSON.
+            },
+            body: JSON.stringify({ title: title }) // Convert the title to a JSON string for sending.
+        });
+
+        // Check if the response status is not OK (successful).
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText); // Throw an error if the response is not OK.
+        }
+
+        // Update the page content to indicate that films are being searched.
+        document.getElementById('found_films').textContent = 'Found films ...';
+        
+        // Redirect the user to the section where the films are displayed.
+        window.location.href = 'http://localhost:8000/my_watchlist/#found_films';
+
+        // Parse the response JSON data.
+        const data = await response.json();
+        let film = "";
+
+        // Iterate over each film data and create HTML elements for each film.
+        data.forEach(data => {
+            console.log(data.title); // Log the title of each film for verification.
+            film += `<div class="container_film">
+                        <img src="${data.cover}" alt="pelicula">
+                        <div class="info_film">
+                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <p class="p_film"></p>
+                        </div>
+                    </div>`;
+        });
+
+        // Update the inner HTML of the element with id 'peliculas' with the film elements.
+        document.getElementById('peliculas').innerHTML = film;
+        
+    } catch (error) {
+        // Log any errors that occur during the fetch process.
+        console.error('Error:', error);
+    }
+}
 
 // Search for the films
 async function searchFilm() {
@@ -273,7 +330,7 @@ async function searchFilm() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -288,6 +345,7 @@ async function searchFilm() {
     }
 }
 
+//Show films
 async function films() {
     
     try {
@@ -315,7 +373,7 @@ async function films() {
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
-                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <h3 class="text_film"><a class="name_film" href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
                             <p class="p_film"></p>
                         </div>
                     </div>`;
@@ -330,78 +388,6 @@ async function films() {
     }
 }
 
-// Show the films
-// async function films() {
-//     // Send a GET request to the server to fetch the list of films.
-//     fetch(URL_BASE + '/films')
-//         .then(response => {
-
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             return response.json(); // Convert the response to JSON format.
-//         })
-//         .then(films => {
-//             let film = "";
-
-//             // Iterate through each film data and create HTML elements for each film.
-//             films.forEach(film => {
-//                 console.log(film.title); // Log the title of each film for verification.
-//                 film += `<div class="container_film">
-//                             <img src="${film.cover}" alt="poster film">
-//                             <div class="info_film">
-//                                 <h3 class="text_film"><a href="">${film.title}</a></h3>
-//                                 <p class="p_film"></p>
-//                             </div>
-//                         </div>`;
-//             });
-
-//             // Update the inner HTML of the element with id 'container_films' with the film elements.
-//             document.getElementById('container_films').textContent = film;
-//         })
-//         .catch(error => {
-//             // Log any errors that occur during the fetch process.
-//             console.error('Error fetching films:', error);
-//         });
-// }
-
-
-// Show the films
-// async function films() {
-//     try {
-//         // Send an HTTP GET request to fetch the list of films from the server.
-//         const response = await fetch(URL_BASE + '/films', {
-//             method: 'GET', 
-//             headers: {
-//                 'Content-Type': 'application/json' 
-//             },
-//             // body: JSON.stringify() // No need for a body in a GET request, but included for consistency.
-//         });
-
-//         // Parse the response JSON data.
-//         const data = await response.json();
-//         let film = "";
-
-//         // Iterate through each film data and create HTML elements for each film.
-//         data.forEach(film => {
-//             console.log(film.title); // Log the title of each film for verification.
-//             film += `<div class="container_film">
-//                         <img src="${film.cover}" alt="poster film">
-//                         <div class="info_film">
-//                             <h3 class="text_film"><a href="">${film.title}</a></h3>
-//                             <p class="p_film"></p>
-//                         </div>
-//                     </div>`;
-//         });
-
-//         // Update the inner HTML of the element with id 'container_films' with the film elements.
-//         document.getElementById('container_films').innerHTML = film;
-        
-//     } catch (error) {
-//         // Log any errors that occur during the fetch process.
-//         console.error('Error:', error);
-//     }
-// }
 
 async function infoUser(){
     const username = localStorage.getItem('username');
@@ -442,6 +428,48 @@ async function infoUser(){
 //         console.error('There was a problem with the fetch operation:', error);
 //     }
 // }
+
+
+
+// Show watchlist
+async function getWatchlist(username) {
+    try {
+        const response = await fetch(URL_BASE + '/users/watchlist', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username })
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const watchlist = await response.json();
+        console.log(watchlist)
+        
+        let film = "";
+
+        // Iterate over each film data and create HTML elements for each film.
+        watchlist.forEach(item => {
+        console.log(item.title); // Log the title of each film for verification.
+        film += `<div class="container_film">
+                        <img src="${item.cover}" alt="pelicula">
+                        <div class="info_film">
+                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${item.code})">${item.title}</a></h3>
+                            <p class="p_film"></p>
+                        </div>
+                    </div>`;
+        });
+
+        // Update the inner HTML of the element with id 'container_watchlist' with the film elements.
+        document.getElementById('container_watchlist').innerHTML = film;
+        
+    } catch (error) {
+        alert(error.message);
+    }
+}
 
 
 async function detailsFilm(codigo){
