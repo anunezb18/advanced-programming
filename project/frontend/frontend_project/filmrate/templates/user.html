@@ -23,7 +23,7 @@
     <!-- User section start -->
     <div class="user_container">
         <div class="container">
-            <h1>Hello, username</h1>
+            <h1 id="username_banner">Hello</h1>
             <div class="info" id="info"></div>
             <div class="info_watchlist">
                 <h2>Your watchlist</h2>
@@ -40,6 +40,7 @@
 
     <script>
         const username = localStorage.getItem('username');
+        document.getElementById('username_banner').textContent = 'Wellcome back, ' + username;
         getInfoUser(username);
         getWatchlist(username);
     </script>
