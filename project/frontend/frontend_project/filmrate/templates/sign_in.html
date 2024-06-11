@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
-    <script src="static/functions.js"></script>
+    <script src="/static/functions.js"></script>
     <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -36,7 +36,7 @@
                      <label for="password" class="form_label">Password</label>
                      <span class="form_line"></span>
                   </div>
-                  <input type="submit" class="form_submit" value="Enter">
+                  <button type="button" class="form_submit" onclick="signIn()">Enter</button>
                </div>
 
             </form>

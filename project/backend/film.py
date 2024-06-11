@@ -26,6 +26,7 @@ class Film(BaseModel):
     reviews: Optional[List[Review]] = []
     lenght: str
     crew: str
+    cover: Optional[str] = None
 
     def add_to_db(self):
         """
@@ -76,6 +77,7 @@ class FilmDB(Base):
     reviews = Column(ARRAY(String))
     lenght = Column(String)
     crew = Column(String)
+    cover = Column(String)
 
 class SearchModel(BaseModel):
     """Class to represent the search model for the films"""

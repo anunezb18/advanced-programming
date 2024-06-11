@@ -7,11 +7,25 @@ from sqlalchemy import create_engine
 from film import Film, FilmDB, SearchModel, AddToWatchlistModel
 from review import Review
 from user import User, UserDB, LoginModel
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
+origins = [
+    "http://localhost",
+    "http://localhost:8000",  # Agrega aquí el origen de tu frontend
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Authorization", "Content-Type"],
+)
+
 engine_users = create_engine(
-    "postgresql://postgres:123k@host.docker.internal:5432/project-users"
+    "postgresql://postgres:123@host.docker.internal:5432/project-users"
 )
 engine_films = create_engine(
     "postgresql://postgres:123@host.docker.internal:5432/project-films"
@@ -220,3 +234,17 @@ def get_all_films():
     ]
 
     return films
+
+
+@app.get("/users/{username}")
+def get_user(username: str):
+    """This method returns user information based on username"""
+
+    session_maker = sessionmaker(bind=engine_users)
+    session = session_maker()
+
+    user = session.query(UserDB).filter_by(username=username).first()
+    if user is None:
+        return {"message": "User not found."}
+
+    return {"email": user.email, "username": user.username, "watchlist": user.watchlist}

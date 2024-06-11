@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <script src="/static/functions.js"></script>
     <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
     
 </head>
@@ -19,65 +20,37 @@
     <!-- header section start -->
     {% include "header_user.html" %}
     <!-- header section end -->
-     <!-- header section end -->
-     <!-- banner section start -->
+    <!-- banner section start -->
      <div class="banner_section banner_home">
            <div class="container">  
-                {% with firstname="Tobias" %}
-                    <h1 class="banner_title">Wellcome back, {{ firstname}}</h1>
-                {% endwith %}
+                <h1 class="banner_title" id="username_banner">Wellcome</h1>
                 <p class="banner_text">What film do you want search?</p>
                 <div class="search">
-                    <input type="text" placeholder="Search film...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search film..." id="title">
+                    <i class="fa-solid fa-magnifying-glass" onclick="searchFilmHome()"></i>
                 </div>
            </div>
      </div>
     <!-- banner section end -->
-    <!-- films section end -->
+    <!-- found films start -->
+    <div class="films_section films_home found_films">
+        <div class="container">
+            <div class="title">
+                <h4 id="found_films"></h4>
+            </div>
+            <p id="displayMessage"></p>
+            <div id="peliculas" class="films"></div>
+        </div>
+    </div>
+    <!-- found films section end -->
+    <!-- films section start -->
     <div class="films_section films_home">
         <div class="container">
             <div class="title">
                 <h2>Films</h2>
             </div>
-            <div class="films">
-                <div class="container_film">
-                    <img src="{% static 'images/1.png' %}" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film"></h3>
-                        <p class="p_film"></p>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="{% static 'images/2.png' %}" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film"></h3>
-                        <p class="p_film"></p>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="{% static 'images/3.png' %}" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film"></h3>
-                        <p class="p_film"></p>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="{% static 'images/4.png' %}" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film"></h3>
-                        <p class="p_film"></p>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="{% static 'images/5.png' %}" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film"></h3>
-                        <p class="p_film"></p>
-                    </div>
-                </div>  
-            </div>
-            <div class="see_btn"><a href="#">See More Films</a></div>
+            <div class="films" id="container_films"></div>
+            <div class="see_btn"><a href="#" >See More Films</a></div>
         </div>
     </div>
     <!-- films section end -->
@@ -193,5 +166,15 @@
     {% include "footer.html" %}
     <!-- footer  section end -->
 
+    <script>
+        films();
+        infoUser();
+        const username = localStorage.getItem('username');
+        console.log(username)
+        document.getElementById('username_banner').textContent = 'Wellcome back, ' + username;
+
+        //getUserInfo(username);
+
+    </script>
 </body>
 </html>
