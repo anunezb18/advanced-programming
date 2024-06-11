@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{% static 'images/logo1.jpg' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    <script src="/static/functions.js"></script>
     <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
     
 </head>
@@ -26,142 +27,42 @@
                 <p class="banner_text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos, culpa!</p>
                 <div class="search">
                     <input type="text" placeholder="Search film...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-magnifying-glass" onclick="searchFilm()"></i>
                 </div>
            </div>
      </div>
     <!-- banner section end -->
-    <!-- films section end -->
-    <div class="films_section">
+    <!-- found films start -->
+    <div class="films_section films_home found_films">
         <div class="container">
-            <!--<div class="title">
-                <h2>Your watchlist</h2>
-            </div>-->
-            <div class="films">
-                {% for film in films %} 
-                <div class="container_film">
-                    <img src={% static  film.image %} alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">{{ film.name }}</h3>
-                        <p class="p_film">{% for x in film.stars %}
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            {% endfor%}
-                        </p>
-                    </div>
-                </div>  
-                {% endfor %}
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div> 
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div> 
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="container_film">
-                    <img src="" alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">Name film</h3>
-                        <div class="rating">
-                            <i class="fa-solid fa-star" id="star1"></i>
-                            <i class="fa-solid fa-star" id="star2"></i>
-                            <i class="fa-solid fa-star" id="star3"></i>
-                            <i class="fa-solid fa-star" id="star4"></i>
-                            <i class="fa-solid fa-star" id="star5"></i>
-                        </div>
-                    </div>
-                </div> 
+            <div class="title">
+                <h4 id="found_films"></h4>
             </div>
-            <!--<div class="see_btn"><a href="#">Add More Films</a></div>-->
+            <p id="displayMessage"></p>
+            <div id="peliculas" class="films"></div>
         </div>
     </div>
+    <!-- found films section end -->
+    <!-- films section end -->
+    <div class="films_section films_home">
+        <div class="container">
+            <div class="title">
+                <h2>Films</h2>
+            </div>
+            <div class="films" id="container_films">
+            </div>
+            <div class="see_btn"><a href="#">Search Film</a></div>
+        </div>
+    </div>
+    <!--<div class="see_btn"><a href="#">Add More Films</a></div>-->
     <!-- films section end -->
     <!-- footer  section start -->
     {% include "footer.html" %}
     <!-- footer  section end -->
+    <script>
+        infoUser();
+        films();
+    </script>
 
 </body>
 </html>

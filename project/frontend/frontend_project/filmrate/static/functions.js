@@ -229,40 +229,82 @@ async function searchFilm() {
     }
 }
 
-// Show the films
 async function films() {
-    // Send a GET request to the server to fetch the list of films.
-    fetch(URL_BASE + '/films')
-        .then(response => {
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json(); // Convert the response to JSON format.
-        })
-        .then(films => {
-            let film = "";
-
-            // Iterate through each film data and create HTML elements for each film.
-            films.forEach(film => {
-                console.log(film.title); // Log the title of each film for verification.
-                film += `<div class="container_film">
-                            <img src="${film.cover}" alt="poster film">
-                            <div class="info_film">
-                                <h3 class="text_film"><a href="">${film.title}</a></h3>
-                                <p class="p_film"></p>
-                            </div>
-                        </div>`;
-            });
-
-            // Update the inner HTML of the element with id 'container_films' with the film elements.
-            document.getElementById('container_films').textContent = film;
-        })
-        .catch(error => {
-            // Log any errors that occur during the fetch process.
-            console.error('Error fetching films:', error);
+    
+    try {
+        // Send an HTTP POST request to the server to search for films by title.
+        const response = await fetch(URL_BASE + '/films', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify() 
         });
+
+        // Check if the response status is not OK (successful).
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText); // Throw an error if the response is not OK.
+        }
+
+        // Parse the response JSON data.
+        const data = await response.json();
+        let film = "";
+
+        // Iterate over each film data and create HTML elements for each film.
+        data.forEach(data => {
+            console.log(data.title); // Log the title of each film for verification.
+            film += `<div class="container_film">
+                        <img src="${data.cover}" alt="pelicula">
+                        <div class="info_film">
+                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <p class="p_film"></p>
+                        </div>
+                    </div>`;
+        });
+
+        // Update the inner HTML of the element with id 'peliculas' with the film elements.
+        document.getElementById('container_films').innerHTML = film;
+        
+    } catch (error) {
+        // Log any errors that occur during the fetch process.
+        console.error('Error:', error);
+    }
 }
+
+// Show the films
+// async function films() {
+//     // Send a GET request to the server to fetch the list of films.
+//     fetch(URL_BASE + '/films')
+//         .then(response => {
+
+//             if (!response.ok) {
+//                 throw new Error('Network response was not ok');
+//             }
+//             return response.json(); // Convert the response to JSON format.
+//         })
+//         .then(films => {
+//             let film = "";
+
+//             // Iterate through each film data and create HTML elements for each film.
+//             films.forEach(film => {
+//                 console.log(film.title); // Log the title of each film for verification.
+//                 film += `<div class="container_film">
+//                             <img src="${film.cover}" alt="poster film">
+//                             <div class="info_film">
+//                                 <h3 class="text_film"><a href="">${film.title}</a></h3>
+//                                 <p class="p_film"></p>
+//                             </div>
+//                         </div>`;
+//             });
+
+//             // Update the inner HTML of the element with id 'container_films' with the film elements.
+//             document.getElementById('container_films').textContent = film;
+//         })
+//         .catch(error => {
+//             // Log any errors that occur during the fetch process.
+//             console.error('Error fetching films:', error);
+//         });
+// }
 
 
 // Show the films
