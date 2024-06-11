@@ -2,4 +2,4 @@
 
 This is the diagram of the backend used in the project's development.
 
-<!-- TODO: Poner imagen del diagrama de clases -->
+![Diagrama de Clases](https://raw.githubusercontent.com/anunezb18/advanced-programming/main/project/docs/class_diagram.jpg)
