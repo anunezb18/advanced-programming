@@ -34,17 +34,18 @@
                     <i class="fa-solid fa-film"></i>
                     <p>Watchlist</p>
                 </div>
-                <div class="rating">
+                <!-- <div class="rating">
                     <i class="fa-solid fa-star" id="star1"></i>
                     <i class="fa-solid fa-star" id="star2"></i>
                     <i class="fa-solid fa-star" id="star3"></i>
                     <i class="fa-solid fa-star" id="star4"></i>
                     <i class="fa-solid fa-star" id="star5"></i>
                     <p>Rate</p>
-                </div>
+                </div> -->
             </div>
             
-            <div class="film_review">
+            <div class="film_review" id="reviews">
+                
                 <div class="review">
                     <div class="username">
                         <div><img src="" alt=""></div>
@@ -52,29 +53,6 @@
                         <div><p><b>Username</b></p></div>
                     </div>
                     <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                    </div>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                        Quibusdam ullam nostrum beatae quidem asperiores architecto 
-                        alias ipsum quia, aperiam soluta.
-                    </p>
-                </div>
-                <div class="review">
-                    <div class="username">
-                        <div><img src="" alt=""></div>
-                        <div><i class="fa-solid fa-circle-user"></i></div>
-                        <div><p><b>Username</b></p></div>
-                    </div>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
                     </div>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
                         Quibusdam ullam nostrum beatae quidem asperiores architecto 
@@ -110,6 +88,7 @@
     <script>
         const filmId = localStorage.getItem('filmId');
         detailsFilm(filmId);
+        getReview(filmId)
     </script>
 
 </body>

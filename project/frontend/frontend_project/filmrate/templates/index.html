@@ -25,8 +25,8 @@
            <div class="container">
                 <h1 class="banner_title">Explore rankings and find your next favorite movie.</h1>
                 <div class="search">
-                    <input type="text" placeholder="Search film...">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search film..." id="title">
+                    <i class="fa-solid fa-magnifying-glass" onclick="searchFilmIndex()"></i>
                 </div>
                 <p class="banner_text">Don't know what movie to watch? Check the rankings and find out what other movie buffs think.
                 </p>
@@ -34,50 +34,28 @@
            </div>
      </div>
     <!-- banner section end -->
-    <!-- films section start -->
-    <div class="films_section films_index">
+    <!-- found films start -->
+    <div class="films_section films_home found_films">
         <div class="container">
             <div class="title">
-                <h2>Films <hr>
-                </h2>
+                <h4 id="found_films"></h4>
             </div>
-            <div class="films">
-                {% for film in films %} 
-                <div class="container_film">
-                    <img src={% static  film.image %} alt="poster film">
-                    <div class="info_film">
-                        <h3 class="text_film">{{ film.name }}</h3>
-                        <p class="p_film">
-                            {% if film.stars == "1" %}
-                            <i class="fa-solid fa-star"></i>
-                            {% elif film.stars == "2" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% elif film.stars == "3" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% elif film.stars == "4" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% elif film.stars == "5" %}
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            {% endif%}
-                        </p>
-                    </div>
-                </div>  
-                {% endfor %}
-                
-            </div>
-            <div class="see_btn"><a href="{% url 'films' %}">See More</a></div>
+            <p id="displayMessage"></p>
+            <div id="peliculas" class="films"></div>
         </div>
-    </div> 
+    </div>
+    <!-- found films section end -->
+    <!-- films section end -->
+    <div class="films_section films_home">
+        <div class="container">
+            <div class="title">
+                <h2>Films</h2>
+            </div>
+            <div class="films" id="container_films">
+            </div>
+            <div class="see_btn"><a href="#">Search Film</a></div>
+        </div>
+    </div>
     <!-- films section end -->
 
     <!-- review section start -->
@@ -209,6 +187,10 @@
     <!-- footer  section start -->
     {% include "footer.html" %}
     <!-- footer  section end -->
+
+    <script>
+        films();
+    </script>
 
 </body>
 </html>
