@@ -172,6 +172,65 @@ async function searchFilmHome() {
 }
 
 // Search for the films
+async function searchFilmUser() {
+
+    // Retrieve the value of the input field with the id 'title' from the HTML document.
+    const title = document.getElementById('title').value;
+    
+    // Check if the title is empty or only whitespace.
+    if (!title.trim()) {
+        alert("Title must not be empty or only whitespace");
+        return; // Exit the function if the title is invalid.
+    }
+    
+    try {
+        // Send an HTTP POST request to the server to search for films by title.
+        const response = await fetch(URL_BASE + '/films/search', {
+            method: 'POST', // Define the HTTP method as POST.
+            headers: {
+                'Content-Type': 'application/json' // Specify that the request content is JSON.
+            },
+            body: JSON.stringify({ title: title }) // Convert the title to a JSON string for sending.
+        });
+
+        // Check if the response status is not OK (successful).
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText); // Throw an error if the response is not OK.
+        }
+
+        // Update the page content to indicate that films are being searched.
+        document.getElementById('found_films').textContent = 'Found films ...';
+        
+        // Redirect the user to the section where the films are displayed.
+        window.location.href = 'http://localhost:8000/films_user/#found_films';
+
+        // Parse the response JSON data.
+        const data = await response.json();
+        let film = "";
+
+        // Iterate over each film data and create HTML elements for each film.
+        data.forEach(data => {
+            console.log(data.title); // Log the title of each film for verification.
+            film += `<div class="container_film">
+                        <img src="${data.cover}" alt="pelicula">
+                        <div class="info_film">
+                            <h3 class="text_film"><a href="#" onclick="detailsFilm(${data.code})">${data.title}</a></h3>
+                            <p class="p_film"></p>
+                        </div>
+                    </div>`;
+        });
+
+        // Update the inner HTML of the element with id 'peliculas' with the film elements.
+        document.getElementById('peliculas').innerHTML = film;
+        
+    } catch (error) {
+        // Log any errors that occur during the fetch process.
+        console.error('Error:', error);
+    }
+}
+
+
+// Search for the films
 async function searchFilm() {
 
     // Retrieve the value of the input field with the id 'title' from the HTML document.
