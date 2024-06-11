@@ -518,34 +518,33 @@ async function getWatchlist(username) {
     }
 }
 
-
-// async function detailsFilm(codigo){
-//     try{
-//         const response = await fetch(URL_BASE + '/', {
-//             method: 'GET',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify()
-//         });
-
-//         const data = await response.json();
-//         let film = "";
-
-//         data.forEach(data => {
-//             console.log(data.title)
-//             film += `<div class="container_film">
-//                         <img src="${data.poster}" alt="poster film">
-//                         <div class="info_film">
-//                             <h3 class="text_film"><a href="">${data.title}</a></h3>
-//                             <p class="p_film"></p>
-//                         </div>
-//                     </div>`;
-//         });
-
-//         document.getElementById('container_films').innerHTML = film;
+async function getInfoUser(username){
+    try {
+        const response = await fetch(`http://localhost:8080/users/${username}`, {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify()
+        });
+                
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
         
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
+        const data = await response.json();
+        const watchlist_user = data.watchlist;
+
+        let info = "";
+
+        info += `<h2>Infomation: </h2>
+                <p><b>Username: </b>${data.username}</p>
+                <p><b>Gmail: </b>${data.email}</p>`;
+    
+
+        document.getElementById('info').innerHTML = info;
+        
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error);
+    }
+}
