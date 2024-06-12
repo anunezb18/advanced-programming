@@ -25,6 +25,7 @@ class Film(BaseModel):
     lenght: str
     crew: str
     cover: Optional[str] = None
+    score: Optional[int]
 
     def add_to_db(self):
         """
@@ -44,6 +45,7 @@ class Film(BaseModel):
             reviews=self.reviews,
             lenght=self.lenght,
             crew=self.crew,
+            score = self.score
         )
         session.add(film_db)
         session.commit()
@@ -75,6 +77,8 @@ class FilmDB(Base):
     lenght = Column(String)
     crew = Column(String)
     cover = Column(String)
+    score = Column(Integer)
+
 
 class SearchModel(BaseModel):
     """Class to represent the search model for the films"""

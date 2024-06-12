@@ -109,9 +109,9 @@ async function signIn() {
 async function signOut(){
     localStorage.removeItem('username');
     localStorage.removeItem('password');
-    document.getElementById('username_header').innerText = "Username";
-    document.getElementById('username_banner').innerText = '';
+    window.location.href = 'http://localhost:8000';
 }
+
 
 // Search for the films
 async function searchFilmHome() {
@@ -265,15 +265,39 @@ async function searchFilmWatchlist() {
         // Parse the response JSON data.
         const data = await response.json();
         let film = "";
+        rate = "";
 
         // Iterate over each film data and create HTML elements for each film.
         data.forEach(data => {
+            score = data.score
+            if (score === 1){
+                rate = `<i class="fa-solid fa-star"></i>`;
+            }else if(score === 2){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 3){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 4){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 5){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }
+
             console.log(data.title); // Log the title of each film for verification.
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
                             <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
-                            <p class="p_film"></p>
+                            <div class="rating">${rate}</div>
                         </div>
                     </div>`;
         });
@@ -324,14 +348,40 @@ async function searchFilmIndex() {
         const data = await response.json();
         let film = "";
 
+        let rate;
+
         // Iterate over each film data and create HTML elements for each film.
         data.forEach(data => {
             console.log(data.title); // Log the title of each film for verification.
+
+            score = data.score
+            if (score === 1){
+                rate = `<i class="fa-solid fa-star"></i>`;
+            }else if(score === 2){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 3){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 4){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 5){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }
+
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
                             <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
-                            <p class="p_film"></p>
+                            <p class="p_film">${rate}</p>
                         </div>
                     </div>`;
         });
@@ -381,16 +431,41 @@ async function searchFilm() {
 
         // Parse the response JSON data.
         const data = await response.json();
-        let film = "";
+        let film = "";  
+        let rate = "";
 
         // Iterate over each film data and create HTML elements for each film.
         data.forEach(data => {
             console.log(data.title); // Log the title of each film for verification.
+            score = data.score
+            
+            if (score === 1){
+                rate += `<i class="fa-solid fa-star"></i>`;
+            }else if(score === 2){
+                rate += `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 3){
+                rate += `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 4){
+                rate += `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 5){
+                rate += `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }
+
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
                             <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
-                            <p class="p_film"></p>
+                           <div class="rating">${rate}</div>
                         </div>
                     </div>`;
         });
@@ -425,17 +500,45 @@ async function films() {
         // Parse the response JSON data.
         const data = await response.json();
         let film = "";
+        
+        let rate = "";
+        let score;
 
         // Iterate over each film data and create HTML elements for each film.
         data.forEach(data => {
             console.log(data.title); // Log the title of each film for verification.
+            score = data.score
+            if (score === 1){
+                rate = `<i class="fa-solid fa-star"></i>`;
+            }else if(score === 2){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 3){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 4){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }else if(score === 5){
+                rate = `<i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>`;
+            }
+
             film += `<div class="container_film">
                         <img src="${data.cover}" alt="pelicula">
                         <div class="info_film">
                             <h3 class="text_film" onclick="filmID(${data.code})"><a href="http://localhost:8000/details_film" class="name_film">${data.title}</a></h3>
-                            <p class="p_film"></p>
+                            <div class="rating">${rate}</div>
                         </div>
                     </div>`;
+
+            rate = "";
         });
 
         // Update the inner HTML of the element with id 'peliculas' with the film elements.
@@ -452,6 +555,7 @@ async function filmID(filmId) {
     localStorage.setItem('filmId', filmId);
 }
 
+
 // Show the film info
 async function detailsFilm(film_code){
     try{
@@ -467,21 +571,33 @@ async function detailsFilm(film_code){
         }
     
         const filmData = await response.json();
-        // const rating = filmData.rating;
+        const score = filmData.score;
+        console.log(score)
+        
+        let rate = "";
 
-        // let rate = 0;
-        // let aux = 1;
+        if (score === 1){
+            rate += `<i class="fa-solid fa-star"></i>`;
+        }else if(score === 2){
+            rate += `<i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>`;
+        }else if(score === 3){
+            rate += `<i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>`;
+        }else if(score === 4){
+            rate += `<i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>`;
+        }else if(score === 5){
+            rate += `<i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>`;
+        }
 
-        // rating.forEach(num =>{
-        //     rate += num;
-        //     aux += 1;
-        // });
-
-        // rate = rate/aux;
-
-        // console.log(rate);
-
-        // console.log(rating);
         let info = "";
         let img = "";
 
@@ -493,9 +609,11 @@ async function detailsFilm(film_code){
                     <div class="film_title">
                         <h3>${filmData.title}</h3>
                     </div>
-                    <div class="rating">
-                        <i class="fa-solid fa-star"></i>
-                    </div>
+                    <div class="rating">${rate}</div>
+                    <p class="film_descrition"><b>Director: </b>${filmData.director}</p>
+                    <p class="film_descrition"><b>Year: </b>${filmData.year}</p>
+                    <p class="film_descrition"><b>Lenght: </b>${filmData.lenght}</p>
+                    <p class="film_descrition"><b>Crew: </b>${filmData.crew}</p>
                     <p class="film_descrition">${filmData.synopsis}</p>
                 </div>`;
 
@@ -553,6 +671,31 @@ async function getWatchlist(username) {
     }
 }
 
+async function addWatchlist(username, filmId){
+    try {
+        const response = await fetch(URL_BASE + `/users/add_to_watchlist`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username, film_id: filmId })
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        const data = await response.json();
+        console.log(data.message);  // Muestra el mensaje de éxito en la consola
+        alert(data.message);  // Muestra el mensaje de éxito en una alerta
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Could not add to watchlist');
+    }
+
+}
+
 // Show the user info
 async function getInfoUser(username){
     try {
@@ -585,37 +728,48 @@ async function getInfoUser(username){
     }
 }
 
-async function getReviews(film_code){
-    try {
-        const response = await fetch(URL_BASE + `/films/${film_code}/reviews`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
+// async function getReviews(film_code){
+//     try {
+//         const response = await fetch(URL_BASE + `/films/${film_code}/reviews`, {
+//             method: 'GET',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok ' + response.statusText);
+//         }
 
-        const data = await response.json();
+//         const data = await response.json();
+//         console.log(data);  // Verificar la estructura de la respuesta aquí
 
-        let reviews = "";
-        reviews.forEach(review => {
-            reviews += `<div class="review">
-                            <div class="username">
-                                <div><img src="${review.cover}" alt="poster film"></div>
-                                <div><i class="fa-solid fa-circle-user"></i></div>
-                                <div><p><b>${review.username}</b></p></div>
-                            </div>
-                            <div class="rating"></div>
-                            <p>${review.text}</p>
-                        </div>`;
-        });
+        
 
-        document.getElementById('reviews').innerHTML = reviews;
+//         // let reviews_info = "";
 
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
+//         // if (reviews.length === 0) {
+//         //     reviewsHTML += `<p>No hay reseñas para esta película.</p>`;
+//         // } else {
+
+//         // }
+
+//         // let reviews_info = "";
+//         // reviews.forEach(review => {
+//         //     reviews_info += `<div class="review">
+//         //                         <div class="username">
+//         //                             <div><img src="${review.cover}" alt="poster film"></div>
+//         //                             <div><i class="fa-solid fa-circle-user"></i></div>
+//         //                             <div><p><b>${review.username}</b></p></div>
+//         //                         </div>
+//         //                         <div class="rating"></div>
+//         //                         <p>${review.text}</p>
+//         //                     </div>`;
+//         // });
+
+//         // document.getElementById('reviews').innerHTML = reviews_info;
+
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// }

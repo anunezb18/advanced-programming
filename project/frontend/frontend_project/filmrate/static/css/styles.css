@@ -579,8 +579,7 @@ a.name_film {
 }
 
 .film_container .container .film_info .film_descrition{
-    font-family: "Josefin Slab", serif;
-    font-weight: bold;
+    font-family: "Josefin Sans", sans-serif;
     font-size: 16px;
     color: #eeeeee;
 }
@@ -598,9 +597,8 @@ a.name_film {
     grid-area: action;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas: "watched add_watchlist"
-                        "rating rating";
+    grid-template-rows: repeat(1, auto);
+    grid-template-areas: "watched add_watchlist";
 } 
 
 .film_container .container .film_actions .watched,
@@ -612,10 +610,6 @@ a.name_film {
 .film_container .container .film_actions .watched i, 
 .film_container .container .film_actions .add_watchlist i{
     font-size: 30px;
-}
-
-.film_container .container .film_actions .rating{
-    grid-area: rating;
 }
 
 .film_container .container .film_review{

@@ -14,7 +14,11 @@
     <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
     <script src="/static/functions.js"></script>
     <script src="https://kit.fontawesome.com/e97de7ac91.js" crossorigin="anonymous"></script>
-    
+    <style>
+        .action.clicked {
+            color: #d1d35e; /* Color del ícono después de hacer clic */
+        }
+    </style>
 </head>
 <body>
 
@@ -27,11 +31,11 @@
             <div id="details_info"></div>
             <div class="film_actions">
                 <div class="watched">
-                    <i class="fa-solid fa-eye"></i>
+                    <i class="fa-solid fa-eye action" onclick="cambiarColor(this)"></i>
                     <p>Watched</p>
                 </div>
                 <div class="add_watchlist">
-                    <i class="fa-solid fa-film"></i>
+                    <i class="fa-solid fa-film action" onclick="addWatchlist(username, filmId)"></i>
                     <p>Watchlist</p>
                 </div>
                 <!-- <div class="rating">
@@ -54,8 +58,14 @@
 
     <script>
         const filmId = localStorage.getItem('filmId');
+        const username = localStorage.getItem('username');
         detailsFilm(filmId);
-        getReview(filmId)
+        // getReviews(filmId)
+
+        function cambiarColor(icon) {
+            icon.classList.toggle('clicked');
+        }
+
     </script>
 
 </body>

@@ -175,7 +175,7 @@ def add_to_watchlist(item: AddToWatchlistModel):
 
     session.commit()
     session.close()
-    return {"message": "Film added to watchlist successfully"}
+    return {"message": "Film added to watchlist successfully"}
 
 
 @app.post("/users/watchlist", response_model=List[Film])

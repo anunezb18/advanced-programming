@@ -60,101 +60,46 @@
                 <h2>Reviews</h2>
             </div>
             <div class="reviews">
-                <div class="container_review">
-                    <div class="img_review">
-                        <img src="{% static 'images/2.png' %}" alt="">
-                    </div>
-                    <div class="text_review">
-                        <h3>Name movie</h3>
-                        <div class="username">
-                            <div><img src="" alt=""></div>
-                            <div><i class="fa-solid fa-circle-user"></i></div>
-                            <div><p><b>Username</b></p></div>
+                <div class="reviews">
+                    {% for film in films %}
+                    <div class="container_review">
+                        <div class="img_review">
+                            <img src={{ film.image }} alt="">
                         </div>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                        <div class="text_review">
+                            <h3>{{ film.film_title }}</h3>
+                            <div class="username">
+                                <div><img src="" alt=""></div>
+                                <div><i class="fa-solid fa-circle-user"></i></div>
+                                <div><p><b>{{ film.username }}</b></p></div>
+                            </div>
+                            <div class="rating">
+                                {% if film.stars == "1" %}
+                                <i class="fa-solid fa-star"></i>
+                                {% elif film.stars == "2" %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                {% elif film.stars == "3" %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                {% elif film.stars == "4" %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                {% elif film.stars == "5" %}
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                {% endif%}
+                            </div>
+                            <p>{{ film.review }}</p>
                         </div>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
-                            alias ipsum quia, aperiam soluta. lorem20
-                        </p>
                     </div>
-                </div>
-                <div class="container_review">
-                    <div class="img_review">
-                        <img src="{% static 'images/5.png' %}" alt="">
-                    </div>
-                    <div class="text_review">
-                        <h3>Name movie</h3>
-                        <div class="username">
-                            <div><img src="" alt=""></div>
-                            <div><i class="fa-solid fa-circle-user"></i></div>
-                            <div><p><b>Username</b></p></div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
-                            alias ipsum quia, aperiam soluta.
-                        </p>
-                    </div>
-                </div>
-                <div class="container_review">
-                    <div class="img_review">
-                        <img src="{% static 'images/4.png' %}" alt="">
-                    </div>
-                    <div class="text_review">
-                        <h3>Name movie</h3>
-                        <div class="username">
-                            <div><img src="" alt=""></div>
-                            <div><i class="fa-solid fa-circle-user"></i></div>
-                            <div><p><b>Username</b></p></div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
-                            alias ipsum quia, aperiam soluta.
-                        </p>
-                    </div>
-                </div>
-                <div class="container_review">
-                    <div class="img_review">
-                        <img src="{% static 'images/3.png' %}" alt="">
-                    </div>
-                    <div class="text_review">
-                        <h3>Name movie</h3>
-                        <div class="username">
-                            <div><img src="" alt=""></div>
-                            <div><i class="fa-solid fa-circle-user"></i></div>
-                            <div><p><b>Username</b></p></div>
-                        </div>
-                        <div class="rating">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
-                            Quibusdam ullam nostrum beatae quidem asperiores architecto 
-                            alias ipsum quia, aperiam soluta.
-                        </p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="see_btn"><a href="#">Search movie</a></div>
