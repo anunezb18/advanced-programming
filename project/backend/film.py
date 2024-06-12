@@ -7,10 +7,9 @@ This file contains the class Film
 
 from typing import List, Optional
 from pydantic import BaseModel
-from sqlalchemy import Column, String, Integer, ARRAY
+from sqlalchemy import Column, String, Integer, ARRAY, JSON
 from sqlalchemy.orm import declarative_base
 from db_connection import PostgresConnection
-from rating import Rating
 from review import Review
 
 
@@ -22,7 +21,6 @@ class Film(BaseModel):
     director: str
     year: int
     synopsis: str
-    ratings: Optional[List[Rating]] = []
     reviews: Optional[List[Review]] = []
     lenght: str
     crew: str
@@ -73,8 +71,7 @@ class FilmDB(Base):
     director = Column(String)
     year = Column(Integer)
     synopsis = Column(String)
-    ratings = Column(ARRAY(String))
-    reviews = Column(ARRAY(String))
+    reviews = Column(ARRAY(JSON))
     lenght = Column(String)
     crew = Column(String)
     cover = Column(String)

@@ -123,13 +123,13 @@ def add_film_review(film_id: int, review: Review = Body(...)):
     if film is None:
         session.close()
         raise HTTPException(status_code=404, detail=f"Film with id {film_id} not found")
-
-    new_review = f"{review.username}: {review.text}"
+    
+    review_dict = review.dict()
 
     if not film.reviews or film.reviews == "{}":
-        film.reviews = [new_review]
+        film.reviews = [review_dict]
     else:
-        film.reviews.append(new_review)
+        film.reviews = film.reviews + [review_dict]
 
     session.commit()
     session.close()

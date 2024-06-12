@@ -585,7 +585,7 @@ async function getInfoUser(username){
     }
 }
 
-async function getReview(film_code){
+async function getReviews(film_code){
     try {
         const response = await fetch(URL_BASE + `/films/${film_code}/reviews`, {
             method: 'GET',
@@ -599,24 +599,21 @@ async function getReview(film_code){
         }
 
         const data = await response.json();
-        const reviews = data.reviews;
 
-        let reviewsHTML = "";
-
-        console.log(data.reviews)
-                            
+        let reviews = "";
         reviews.forEach(review => {
-            reviewsHTML +=  `<div class="review">
-                                    <div class="username">
-                                        <div><i class="fa-solid fa-circle-user"></i></div>
-                                        <div><p><b>${review}</b></p></div>
-                                    </div>
-                                    <div class="rating"></div>
-                                    <p>${review}</p>
-                                </div>`;
+            reviews += `<div class="review">
+                            <div class="username">
+                                <div><img src="${review.cover}" alt="poster film"></div>
+                                <div><i class="fa-solid fa-circle-user"></i></div>
+                                <div><p><b>${review.username}</b></p></div>
+                            </div>
+                            <div class="rating"></div>
+                            <p>${review.text}</p>
+                        </div>`;
         });
 
-        document.getElementById('reviews').innerHTML = reviewsHTML;
+        document.getElementById('reviews').innerHTML = reviews;
 
     } catch (error) {
         console.error('Error:', error);

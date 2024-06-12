@@ -15,5 +15,16 @@ class Review(BaseModel):
 
     username: str
     text: str
+    rating: int
     likes: Optional[int] = None
     replies: Optional[List[Reply]] = None
+
+    def dict(self):
+        return {
+            "username": self.username,
+            "text": self.text,
+            "rating": self.rating,
+            "likes": self.likes,
+            "replies": self.replies
+        }
+
